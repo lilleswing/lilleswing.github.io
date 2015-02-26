@@ -1,0 +1,103 @@
+function [ clusterlist, clusterframe ] = getClusters( frame, thresh_im, size_thresh )
+%UNTITLED2 finds the clusters in a frame, and determines their values
+%   input:
+%   frame - the original frame
+%   thresh_im - clusters to be catagorized
+%   size_thresh - threshold for cluster size
+%   output:
+%   clusterlist - list of n-tuple clusters (r, g, b, x, y, size)
+%   clusterframe - visualization of the clusters
+
+[h, w] = size(frame);
+clusterframe = zeros(h,w); %for numbering clusters
+nclusters = 1;
+clustersizes = zeros(100,1);
+
+%number the clusters
+for x=2:639
+    for y=2:479
+        if thresh_im(y,x) == 1
+            %match neighbor
+            if clusterframe(y,x+1) > 0
+                clusterframe(y,x) = clusterframe(y,x+1);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y-1,x+1) > 0
+                clusterframe(y,x) = clusterframe(y-1,x+1);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y-1,x) > 0
+                clusterframe(y,x) = clusterframe(y-1,x);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y-1,x-1) > 0
+                clusterframe(y,x) = clusterframe(y-1,x-1);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y,x-1) > 0
+                clusterframe(y,x) = clusterframe(y,x-1);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y+1,x-1) > 0
+                clusterframe(y,x) = clusterframe(y+1,x-1);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y+1,x) > 0
+                clusterframe(y,x) = clusterframe(y+1,x);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            elseif clusterframe(y+1,x+1) > 0
+                clusterframe(y,x) = clusterframe(y+1,x+1);
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+            else
+                %new cluster
+                clusterframe(y,x) = nclusters;
+                clustersizes(nclusters) = clustersizes(nclusters) + 1;
+                nclusters = nclusters + 1;
+            end
+        end
+    end
+end
+clusters = zeros(1,6);
+%filter clusters by size
+count = 0;
+for x=2:639
+    for y=2:479
+        if(clusterframe(y,x) == 0)
+            continue
+        end
+        if clustersizes(clusterframe(y,x)) < size_thresh
+            clusterframe(y,x) = 0;
+        else
+            %size:
+            count = count+1;
+            clusters(clusterframe(y,x), 6) = clustersizes(clusterframe(y,x));
+            %add up; divide by size later
+            %display(frame(y,x,1));
+            clusters(clusterframe(y,x), 1) = clusters(clusterframe(y,x), 1) + double(frame(y,x,1));  %r
+            clusters(clusterframe(y,x), 2) = clusters(clusterframe(y,x), 2) + double(frame(y,x,2));  %g
+            clusters(clusterframe(y,x), 3) = clusters(clusterframe(y,x), 3) + double(frame(y,x,3));  %b
+            clusters(clusterframe(y,x), 4) = clusters(clusterframe(y,x), 4) + x;  %x
+            clusters(clusterframe(y,x), 5) = clusters(clusterframe(y,x), 5) + y;  %y
+        end
+    end
+end
+
+%divide attributes by cluster size
+[h, w] = size(clusters);
+for clust=1:h
+    for attr=1:5
+        if clusters(clust,6) > 0
+            clusters(clust,attr) = clusters(clust,attr)/clusters(clust,6);
+        end
+    end
+end
+
+%copy to new(final) list, leaving out small clusters
+ccount = 1;
+for clust=1:h
+    if clusters(clust,6) >= size_thresh  %should just be everything non-zero
+        for attr=1:6
+            clusterlist(ccount,attr) = clusters(clust,attr);
+        end
+    end
+    ccount = ccount + 1;
+end
+
+
+
+end
+

@@ -1,0 +1,15 @@
+%note: rgb gives WAY better results.
+
+background = imread('../Images/background/background.jpg');
+frame = imread('../Images/test1.jpg');
+
+%display(background)
+[newframe, thresh_im] = neutral(frame, background, 250);
+
+%showImage(newframe);
+%fig = showImageGray(thresh_im);
+
+[clusterlist, clusterframe] = getClusters(frame,thresh_im,250);
+%showImageGray(clusterframe);
+%[clusterlist, clusterframe] = 
+%karl_cluster(frame,thresh_im,100);
