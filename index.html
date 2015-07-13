@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" href="favicon.gif">
+
+    <title>Karl Leswing</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Karl Leswing</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Projects</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="img/profile.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">Karl Leswing</span>
+                        <hr class="star-light">
+                        <span class="skills">Machine Learning - Distributed Systems - Data Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About Me</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>I am interested in all things technology from embedded systems to MVC frameworks. I particularly enjoy the fields of Machine Learning, Distributed Systems, and Data Management. I believe that the only way to do something right, is to do it at least two or three times.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>
+                    I am currently the back-end tech lead at
+                    <a href="https://www.schrodinger.com">Schrödinger</a>
+                    for the
+                    <a href="http://www.schrodinger.com/livedesign/">Livedesign</a>
+                    project.
+                    Livedesign is a plugable collaboration environment for computational science.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Education</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <img class="aligntop" src="img/tjhsst.jpg" width="200" height="200" alt="" />
+                    <img class="aligntop" src="img/uva.gif" width="230" height="170" alt="" />
+                    <img class="aligntop" src="img/gatech_logo.gif" width="200" height="200" alt="" />
+                    <p>
+                    <b>High School</b><br> Thomas Jefferson High School for Science and Technology. <br><br>
+                    <b>Bachelors of Science Computer Science</b><br> Engineering School at University of Virginia. <br><br>
+                    <b>Masters in Machine Learning (expected 2016)</b><br> Georgia Institute of Technology
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+    <section class="success" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Projects</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#march-madness-nn">Neural Networks For March Madness</a>
+                        </h4>
+                    </div>
+                    <div id="march-madness-nn" class="panel-collapse collapse"> <!-- add "in" to always be expanded -->
+                        <div id="foo" class="panel-body project-panel">
+                            <h3>Abstract</h3>
+                            Every year since 2008, I have attempted to implement some kind of trained machine learning algorithm to create my March Madness Bracket.
+                            This year I used <a href="http://en.wikipedia.org/wiki/Neural_network"> Neural Networks </a>.
+                            All source code used for this project can be found <a href="https://github.com/lilleswing/March-Madness"> here </a>.
+                            Below is my finalized bracket and earlier versions of my network predicting the tournament.
+                            <img class="aligntop" src="img/nn/Monday.png" width="1000" height="600" alt="" />
+                            <br><br>
+                            <h3>Data Abstraction</h3>
+                            All data for this project was purchased from <a href="http://kenpom.com"> kenpom </a>.
+                            He has a wealth of good information and summary statistics about College Basketball.
+                            <br><br>
+                            I decided to represent teams as a 30 tuple of the 30 statistics that kenpom finds most important.  Among them are ...
+                            <br>
+                            <br>
+                            <ul>
+                                <li>Tempo</li>
+                                <li>Adjusted Tempo</li>
+                                <li>Offensive Efficiency</li>
+                                <li>Adjusted Offensive Efficiency</li>
+                                <li>Defensive Efficiency</li>
+                                <li>Adjusted Defensive Efficiency</li>
+                                <li>Pythagorean Strength of Schedule</li>
+                                <li>Effective Field Goal Percentage</li>
+                                <li>Effective Field Goal Percentage</li>
+                                <li>Turnover Percentage</li>
+                                <li>Offensive Rebounding Percentage</li>
+                                <li>Free Throw Rate</li>
+                                <li>Effective Field Goal Percentage Against</li>
+                                <li>Effective Field Goal Percentage Against</li>
+                                <li>Turnover Percentage Against</li>
+                                <li>Offensive Rebounding Percentage Against</li>
+                                <li>Free Throw Rate Against</li>
+                                <li>3 Point Percentage</li>
+                                <li>2 Point Percentage</li>
+                                <li>Free Throw Percentage</li>
+                                <li>Block Percentage</li>
+                                <li>Steal Percentage</li>
+                                <li>Assist Percentage</li>
+                                <li>3 Point Assist Percentage</li>
+                            </ul>
+                            <br>
+                            For more information of what any of these values actually mean please refer to <a href="http://kenpom.com"> kenpom </a>.
+                            The beauty of Neural Networks is that I don't really have to know what these values are, all I have to know is that they represent a team.
+                            Before storing any of these values I normalize them to have a mean of zero and a standard deviation of one.
+                            While this is technically unnecessary it means that the network can train quicker.
+                            <br><br>
+                            A game is a 60 tuple, that is the 30 tuple of one team followed by another.  Based on this I can create my Network Topology.
+                            <br>
+                            Since a game is a 60 tuple I can define my neural network to have 60 nodes as its input layer.
+                            I then arbitrarily decided on having two hidden layers of size 100 using the Tanh function.
+                            Finally there is one output node, if it is less then zero the first team wins, greater then zero the second team wins.
+                            To be fair to both teams I put all games in twice, once with each team being the first 30 tuples, I then take an average of the results.
+                            This is for both training and playing the tourney.
+                            I played around with the idea with the home team getting to be the first 30 tuples, thereby putting home field advantage into the system,
+                            however I was unable to implement this due to time constraints. <br> <br>
+                            The only human intervention given to this system was rating strength of a win.  I consulted a friend, Nish Trivedi, about how to measure win strength.
+                            We ended up on a simple step function.
+                            <table border="1">
+                            <tr>
+                            <td>Point Range</td>
+                            <td>Output Layer Value</td>
+                            <td>Description</td>
+                            </tr>
+                            <tr>
+                            <td>0</td>
+                            <td>0.0</td>
+                            <td>Tie</td>
+                            </tr>
+                            <tr>
+                            <td>[1-4]</td>
+                            <td>0.5</td>
+                            <td>Could of Gone Either Way</td>
+                            </tr>
+                            <tr>
+                            <td>[5-9]</td>
+                            <td>0.9</td>
+                            <td>Good Win</td>
+                            </tr>
+
+                            <tr>
+                            <td>[10-14]</td>
+                            <td>1.3</td>
+                            <td>Strong Win</td>
+                            </tr>
+
+                            <tr>
+                            <td>[15-inf]</td>
+                            <td>2</td>
+                            <td>Slaughter</td>
+                            </tr>
+                            </table>
+
+                            <h3>Implementation</h3>
+                            I used python to implement this solution end to end.
+                            I scraped data from kenpom with the python <a href="http://docs.python-requests.org/en/latest/"> requests </a> library.
+                            I grabbed the cookie from my chrome session, and spoofed the rest of the headers.  
+                            I accidentally uploaded my session cookie into github, don't worry I have already invalidated it.
+                            For Data Persistence I used sqlite3.
+                            This wasn't necessarily necessary as the data model is simple, and everything easily fits into memory on my laptop,
+                            but I feel like it simplified by DAO a little bit.  It also made it a lot easier to transition from just using 2013 data to using data
+                            from all the way back to 2010. <br>
+                            To create the images I used the python image library (PIL).
+                            I actually had to re-compile PIL with libfreetype to get the images to be a little more readable on smaller screens.
+                            The hosting of PIL decided to go down on 3/13/13 just when I was doing it so I had to spend a day without PIL.<br>
+                            For the Neural Network I used the pybrain library.  The pybrain library is a python implementation of a lot of Machine learning
+                            algorithms.  It is intended to be used as a proof of concept framework, and is not fast.
+                            Because of this I have been training my system since 3/13/2013.
+                            I added to the data set on the already partially stabilized network as it came in.
+                            It has not yet reached convergence.
+                            With this Network it was able to predict 14027 out of 17459 games in its training set correctly.
+                            I know its bad form to evaluate on the same
+                            data set as train, but I did not have enough time to do both, and I would rather have a bracket then statistics about how good my bracket
+                            could be :).
+                            <br><br>
+                            <h3>Possible Improvements</h3>
+                            My model of a team is frankly not very good.  It does not incorporate individual player match ups, injuries or how the team has done recently.
+                            A great way to improve it would be to model the team in aggregate as well as the players.
+                            A way I could do this would be to define each player as a tuple, and append a certain fixed number of them to the end of the team tuple in a 
+                            known ordering.
+                            Example orders would be by points scored, or minutes played.
+                            With this in place I could quickly remove players from my system if they get injured or suspended right before the tournament. <br>
+                            Another issue is a team the first week in the season is not the same team as the last week, right before the tournament.
+                            To show this I could implement the 30 tuple of a team as a sliding window of recent
+                            history directly before the game being played, or placing weighting functions on previous games based on how long ago they happened.
+                            All of these improvements would require a much more complicated data model, and for me to start persisting data WAY earlier then I did.
+                            <br><br>
+                            <h3>A Note On Using My Code</h3>
+                            <a href="https://github.com/lilleswing/March-Madness">github link</a><br>
+
+                            Due to legal restrictions I am not allowed to broadcast kenpom's data to a general audience.
+                            However I am allowed to give it to specific third parties.
+                            In the github I have my sqlite3 database with all the data encrypted with a one time pad.
+                            If you e-mail me I will send you the one time pad file, and then you can get the original DB in the right place with the following function.
+                        </div>
+                    </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#facebook-face-rec">Face Recognition With Hadoop</a>
+                </h4>
+              </div>
+              <div id="facebook-face-rec" class="panel-collapse collapse">
+                <div class="panel-body project-panel">
+
+                    <h3>Abstract</h3>
+                    In this project I attempt to show that even if people untagged incriminating pictures of themselves on Facebook that they were still available and could be found easily.  Facebook, iPhoto, and Picassa already have face-recognition software that they can easily run to find your face all over the internet.  They even have your help, because you have already tagged so many pictures of your face for these Internet giants to create models from.
+                    <br><br>
+                    <h3>Materials &amp; Methods </h3>
+                    Hadoop is an obvious solution for processing large amounts of data.  All other tools I used (Ruby/Python/Bash) were used due to my own familiarity and API to interact with Facebook/Hadoop.  It was also only able to find working command-line face recognition using PCA (The only kind I understood) in Python.  I needed to understand how to use it, because I had to change some of the provided code to suit my purposes.<br><br>
+                    With Hadoop's parallelism, I believed that the time I saved writing the code in python could be mitigated by spinning off more instances.  Besides numpy is actually a really fast implementation of matrix algebra, so I didn't actually lose that much by not doing the computations in C or Java.
+                    <br><br><h3>Results</h3>
+                    My results in a single word were -- disastrous.  I had HUGE numbers of false positives ( greater than 95%).  I attribute this to four issues.
+                    <ol>
+                    <li>My Face Model only used 35 subjects this is not enough for good recognition</li>
+                    <li>My heuristic to identify a person was simply having the best match score with each of the 35 faces in the library.  I should of simply processed the distanced between the polynomials that computed the fisher face, and then used some sort of smart thresholding.  I didn't do this because the purpose of this assignment was to use Haddop, not to process faces, and it would have taken a lot of trial/error and time.</li>
+                    <li>I think I made the resolution of my face model too low.  I should have made it larger than 92 x 112 pixels.  I choose this value because that was the size of images in a face library I found on the Internet, but that face library was for detection not recognition.</li>
+                    <li>Hair is such a HUGE issue.  As people change their hair-style over time the model of their face breaks down extremely quickly.</li>
+                    </ol>
+                    Here are some more comical false positives that the system gave to me.
+                    <img class="aligntop" src="img/fb1.png" width="200" height="120" alt="" />
+                    <img class="aligntop" src="img/fb2.png" width="200" height="120" alt="" />
+                    <img class="aligntop" src="img/fb3.png" width="200" height="140" alt="" />
+                    However I was able to achieve a high level of parallelism.  This system because it does not have any linear dependencies is a “trivially parallelizable system”.  I was able to use Hadoop to schedule the jobs and ensure scaling CPU utilization.<br><br>
+                    It took A little over an hour and a half to do this analysis on ever image that I could access on Facebook.  That is 92581 images in over 90 minutes on 16 cores.<br><br>
+                    The first step towards face-recognition is face detection.  I wrote my face-detection using a library “opencv” and it's python bindings.  The code for facial-recognition I found used python PIL.  Apparently the opencv python bindings are not yet stable, and so most of the documentation I found on line for it did not work for converting images between the two frameworks.<br><br>
+                    Opencv is so not stable that it breaks whenever you try to import it into python on the red-hat Linux Distro that is used for automatically generating Hadoop EC2-clusters.  This meant that I was not able to use the good tools for creating a ec2-hadoop cluster and instead had to make it by hand out of the latest Ubuntu release.<br><br>
+                    Apparently reading in images from std.in is incredibly difficult.  So difficult in fact that UVA's own Jason Lawrence created a library last year with Chris Sweeney and Sean Arietta under an NSF grant.  However this library works in Java, and by the time I realized I had this problem I had already written the face detector and face-recognition in python.<br><br>
+                    This forced me into a work-around.  Instead of passing the images through the Hadoop file system, I passed file pointers, and stored the images on local disk.  This is not the worst thing in the world.  This allows me to have more fine-tuned control over the size of mapping jobs.  By passing text files with a list of file pointers to images I can easily optimize the Map time/ number of map jobs by changing the number of file pointers in each file.  The reason I didn't pass file pointers to within HDFS is because I couldn't find a *good* library for python for reading in and out of HDFS. <br><br>
+                    This model however is not that bad for what I am doing here.  It is a computationally intensive process, not an I/O bound process.  I chose to put the image library on local disk instead of on some soft of virtual file system simply because it fit.  Putting it on a virtual file system would have been acceptable if the library did not fit on local disk. <br><br>
+                    Not using HDFS did not ruin the point of using Hadoop, because Hadoop still scheduled and tracked the mapping jobs.  Even though the mapping jobs had the same number of images they did not take the same amount of time, because Facebook has variable image sizes.  This means that some cores completed more mapping jobs then others, and I would not have been able to do that with a system which statically distributed work. <br><br>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#cluster-traffic">Cluster Based Traffic Detection</a>
+                </h4>
+              </div>
+              <div id="cluster-traffic" class="panel-collapse collapse">
+                <div class="panel-body project-panel">
+                    <h3>Abstract</h3>
+                    This paper discusses the modeling of a “T” intersection using machine vision.  Specifically to know how long cars wait at traffic lights in the different directions, and how many cars go in and out in each direction.  Being able to ascertain this with a single camera setup could conceivably save time and money of Traffic engineers. <br> <br>
+                    Clustering was used to accomplish the majority of these goals.   Cars were then identified as they went through the intersection by matching clusters representing vehicles.
+                    <br><br>
+                    <h3>Materials &amp; Methods</h3>
+                    A single web-camera was setup overlooking a T-intersection in the Charlottesville area.  This camera took images at approximately 2 frames per second over the course of four days.
+                    <center><img class="aligntop" src="img/traffic1.png" width="400" height="400" alt="" /></center>
+                    The process for finding cars begins with a neutral frame with no cars in it.  This frame is then subtracted from all frames in the data set to highlight anomalies (cars) in the images.
+                    <center><img class="aligntop" src="img/traffic2.png" width="300" height="300" alt="" /></center>
+                    After subtracting out the background image, thresholding was applied, and all the non-zero values were clamped to one.
+                    <center><img class="aligntop" src="img/traffic3.png" width="300" height="300" alt="" /></center>
+                    After this the images were clustered.   A basic flood-fill clustering was used for this due to the clean nature of the data. The clusters were then thresholded based on size and position of the cluster.  Clusters farther away from the camera are allowed to be smaller than clusters closer to the camera.  
+                    <center><img class="aligntop" src="img/traffic4.png" width="300" height="300" alt="" /></center>
+                    Now the system has clusters which represent cars in each frame.  The lane that each car was in was determined by superimposing the center of mass of each cluster over a drawn picture representing the lanes.
+                    <center><img class="aligntop" src="img/traffic5.png" width="300" height="300" alt="" /></center>
+                    The system now represents each car as a 7 tuple.  The seven values are red intensity, green intensity, blue intensity, center of mass x, center of mass y, number of pixels, and lane.  This is computed for each frame of data. <br> <br>
+                    Sequential frames are then compared to attempt to match cars to themselves in different frames.  This is done by seeing if the clusters are of similar color and size.  This enables the system determine traffic flow through the intersection, and waiting time at traffic lights.
+                    <br><br><h3>Results</h3>
+                    The system received mixed results.  Over a 10 minute time period the system was able to find 70% of cars over a ten minute time period.  However this required fine-tuning of various thresholding variables.  If cars were detected at stop lights their waiting time was accounted for properly.
+                    <center><img class="aligntop" src="img/traffic5.png" width="300" height="300" alt="" /></center>
+                    <a href=http://www.youtube.com/watch?v=O3mhxB5wQOk&feature=channel_video_title>This</a> is a video of 10 minutes of data; it goes from 6:10pm – 6:20pm.  The arrows signify the direction that the cars are determined to be going. <br> <br>
+                    The system was unable to get accurate flows through the intersection due to mis-labeling and missing cars all-together.  In conclusion this system is not ready to replace people manually counting cars are they go through the intersection.
+                    <br><br><h3>Discussion</h3>
+                    This system does not handle a number of edge cases.  One example of this is dark vehicles.  The thresholding cannot tell the difference between dark cars and the road.  Instead it often picks up the windshield and front bumper of cars.  This causes errors in the tracking algorithm; because the color and size is off, and the system might mistake the cluster for a light colored car farther away from the camera.  Another issue is tinted windows sometimes split the car into two different clusters resulting in over counting. <br> <br>
+                    Another issue with the system was very tall vehicles.  These vehicles center of mass was sometimes higher than the boundaries for the lanes that were created.  This causes the system to believe that the cars are in a higher lane than actuality. <br><br> 
+                    Initially the system was build on HSV color format, however this provided poor highlighting results, so all calculations were converted to RGB. <br> <br>
+                    Because the system has a low frame rate, it sometimes did not get all the data necessary to plot a car’s full path.  So heuristics were used for guessing a cars path from its lane and position.  This was done knowing that cars can go faster turning right and going straight than turning left through traffic.  Because of this if a car only appears in one lane it was assumed that it either stayed in its lane or turned right depending on its current location in the intersection. <br><br>
+                    <a href=https://github.com/lilleswing/traffic_cluster>All matlab code can be found at my github.</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-6">
+                        <h3>EMAIL</h3>
+                        <p>lilleswing@gmail.com</p>
+                    </div>
+                    <div class="footer-col col-md-6">
+                        <h3>Around the Web</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="https://github.com/lilleswing" class="btn-social btn-outline"><i class="fa fa-fw fa-github"> </i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://facebook.com/lilleswing" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/lilleswing" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/lilleswing" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--<div class="footer-col col-md-4">
+                        <h3>About Freelancer</h3>
+                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Karl Leswing 2015
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/freelancer.js"></script>
+
+</body>
+
+</html>
