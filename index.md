@@ -3,6 +3,8 @@ layout: page
 permalink: /
 ---
 
+![Jeepney Karl](/assets/index/jeepney_karl.jpg){: .center-image }
+
 I am a tech lead at
 [Schrödinger]("https://www.schrodinger.com")
 working on machine learning research and [Livedesign]("http://www.schrodinger.com/livedesign").
