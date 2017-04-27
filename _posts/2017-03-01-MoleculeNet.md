@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Molecule Net
+title: MoleculeNet
 ---
 [arXiv-link](https://arxiv.org/abs/1703.00564)
 
