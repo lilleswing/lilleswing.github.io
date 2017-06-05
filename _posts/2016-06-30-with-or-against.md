@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Walking With Or Against Traggic"
+title:  "Walking With Or Against Traffic"
 date:   2016-06-30 12:13:31 -0700
 ---
 
