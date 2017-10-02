@@ -3,7 +3,8 @@ layout: page
 permalink: /
 ---
 
-![Jeepney Karl](/assets/index/jeepney_karl.jpg){: .center-image }
+{: style="text-align:center" }
+![Venice Karl](/assets/index/venice_karl.jpg)
 
 I am a tech lead at
 [Schrödinger](https://www.schrodinger.com)
