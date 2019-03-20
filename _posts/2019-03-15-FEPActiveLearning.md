@@ -3,6 +3,8 @@ layout: page
 title: Active Learning Free Energy Calculations
 ---
 
+![overview_pic](/assets/2019_03_15/preview.jpg)
+
 Check out a new paper I worked on combining synthetic enumeration, free energy perturbation calculations and active learning.
 
 ### Abstract
