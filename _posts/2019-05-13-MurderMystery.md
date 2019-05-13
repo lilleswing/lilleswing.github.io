@@ -16,9 +16,9 @@ So I created a website which can hand our roles.
 ```bash
 # Edit scripts/assign_roles.py with male and female roles
 # Put role images in static/img/{role}.png
-python assign_roles.py
+python scripts/assign_roles.py
 
-# Hand out passwods from static/user_passwords.csv
+# Hand out passwords from static/user_passwords.csv
 # Tell them to use their password on your hosted website
 
 # Host the website somewhere
@@ -33,4 +33,4 @@ The website when uploaded will look something like this.
 
 The users will put in the password from static/user_passwords.csv and get their role assignments and clues.
 
-See it live [here](http://karlleswing.com/misc/pirates/)
+See it live [here](https://karlleswing.com/misc/pirates/)
