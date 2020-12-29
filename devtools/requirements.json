@@ -4,7 +4,7 @@
     "anaconda"
   ],
   "packages": [
-    "ruby=2.7.2"
+    "rb-jekyll"
   ],
   "cpu_packages": [
   ],
