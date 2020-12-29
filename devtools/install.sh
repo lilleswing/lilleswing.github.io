@@ -1,10 +1,7 @@
 #!/bin/bash
-
-wget -O rvm.sh https://get.rvm.io
-bash rvm.sh --path `pwd`/.rvm
-source "`pwd`/.rvm/scripts/rvm"
-rvm install ruby-2.2
-rvm use 2.2
+source /var/lib/jenkins/.rvm/scripts/rvm
+rvm install ruby-3.0.0
+rvm use 3.0.0
 gem update --system
 gem install bundler
 bundle install
