@@ -37,5 +37,7 @@ echo "Installed $ENV_NAME conda environment"
 
 
 ### Front End
+which gem
+gem install bundler
 bundle install
 bundle exec jekyll build
