@@ -5,6 +5,7 @@
   ],
   "packages": [
     "ruby",
+    "gxx_linux-64",
     "rb-bundler"
   ],
   "cpu_packages": [
