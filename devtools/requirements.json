@@ -1,0 +1,14 @@
+{
+  "channels": [
+    "anaconda",
+    "conda-forge"
+  ],
+  "packages": [
+    "ruby",
+    "rb-bundler"
+  ],
+  "cpu_packages": [
+  ],
+  "gpu_packages": [
+  ]
+}
