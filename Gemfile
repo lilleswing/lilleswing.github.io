@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby 3.0
+ruby "3.0"
 
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
@@ -9,10 +9,10 @@ ruby 3.0
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "4.2.0"
+gem "jekyll", "4.3.4"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.5.1"
+gem "minima", "~> 2.5.2"
 gem "redcarpet", "3.5.0"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and

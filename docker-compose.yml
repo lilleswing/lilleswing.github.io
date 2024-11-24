@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  jekyll:
+    build:
+      context: .
+      dockerfile: devtools/Dockerfile
+    user: "${UID}:${GID}" # Run as current user
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      UID: ${UID}
+      GID: ${GID}
+    command: >
+      bash -c "
+        bundle install &&
+        bundle exec jekyll build
+      "
