@@ -1,9 +1,9 @@
-FROM ruby:3.0.0
+FROM ruby:3.4
 
 RUN apt-get update -yq \
-  && apt-get install -yq --no-install-recommends \
+    && apt-get install -yq --no-install-recommends \
     build-essential \
-  && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN gem update --system
 RUN gem install bundler
