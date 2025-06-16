@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://karlleswing.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://karlleswing.com/" rel="alternate" type="text/html" /><updated>2025-06-16T12:50:05+00:00</updated><id>http://karlleswing.com/feed.xml</id><title type="html">Karl Leswing</title><subtitle>Do something every day.
+</subtitle><entry><title type="html">Message Passing Network with Iterative Charge Equilibration (MPNICE)</title><link href="http://karlleswing.com/2025/05/09/MPNICE.html" rel="alternate" type="text/html" title="Message Passing Network with Iterative Charge Equilibration (MPNICE)" /><published>2025-05-09T00:00:00+00:00</published><updated>2025-05-09T00:00:00+00:00</updated><id>http://karlleswing.com/2025/05/09/MPNICE</id><content type="html" xml:base="http://karlleswing.com/2025/05/09/MPNICE.html"><![CDATA[<h1 id="message-passing-network-with-iterative-charge-equilibration-mpnice">Message Passing Network with Iterative Charge Equilibration (MPNICE)</h1>
+
+<p>While the literature has tended towards larger models with increasing numbers of parameters and equivariant featurization, we’ve found that a relatively simple invariant message passing architecture coupled with iterative charge equilibration and long-range coulomb interactions results in similar or greater accuracy while keeping inference costs an order of magnitude lower than comparable MLFFs. Additionally, by incorporating charge equilibration, MPNICE can simultaneously generalize to systems with distinct charge states, and even directly access higher order response properties to external electric fields.</p>
+
+<p><a href="https://arxiv.org/pdf/2505.06462">Link</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Message Passing Network with Iterative Charge Equilibration (MPNICE)]]></summary></entry><entry><title type="html">Introducing FEP Protocol Builder</title><link href="http://karlleswing.com/2023/08/18/FEP-Protocol-Builder.html" rel="alternate" type="text/html" title="Introducing FEP Protocol Builder" /><published>2023-08-18T00:00:00+00:00</published><updated>2023-08-18T00:00:00+00:00</updated><id>http://karlleswing.com/2023/08/18/FEP-Protocol-Builder</id><content type="html" xml:base="http://karlleswing.com/2023/08/18/FEP-Protocol-Builder.html"><![CDATA[<h1 id="fep-protocol-builder">FEP Protocol Builder</h1>
+
+<p style="text-align:center;"><img src="/assets/2023_08_18/fep_pb_workflow.png" alt="FEP_PB" /></p>
+
+<p>Free energy perturbation (FEP) calculations are a powerful tool for predicting the binding affinity of small molecules to proteins and other drug targets.
+However, developing accurate FEP protocols can be challenging and time-consuming, especially for complex systems.</p>
+
+<p>Traditional FEP protocol development requires manual exploration of a large parameter space.
+Additionally, it can be difficult to determine which parameters have the greatest impact on FEP performance, resulting in overfitting.</p>
+
+<p>FEP Protocol Builder (FEP-PB) is an automated workflow that uses active learning to rapidly generate accurate FEP protocols.
+FEP-PB iteratively selects the most informative protocol parameter settings to test, based on the results of previous calculations.
+This approach allows FEP-PB to quickly identify a set of parameter settings that produce accurate FEP results, with minimal human intervention.</p>
+
+<p>To validate FEP-PB, we applied it to a variety of pharmaceutically relevant systems, including the previously challenging MCL1 system.
+FEP-PB was able to rapidly generate accurate FEP protocols for all the systems tested, with minimal human intervention.</p>
+
+<p>In a real-world drug discovery setting, FEP-PB was used to generate an accurate FEP protocol for the p97 system.
+FEP-PB was able to generate a more accurate protocol than the expert user, rapidly validating p97 as amenable to free energy calculations.</p>
+
+<p>FEP-PB is a powerful new tool that can help researchers to rapidly develop accurate FEP protocols for a wide range of systems.
+This could lead to the discovery of new drugs more quickly and efficiently.</p>
+
+<p>Check out the full work <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.3c00681">here</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[FEP Protocol Builder]]></summary></entry><entry><title type="html">pKa Prediction with Graph Neural Networks</title><link href="http://karlleswing.com/2023/04/06/pKa-prediction-with-GNNs.html" rel="alternate" type="text/html" title="pKa Prediction with Graph Neural Networks" /><published>2023-04-06T00:00:00+00:00</published><updated>2023-04-06T00:00:00+00:00</updated><id>http://karlleswing.com/2023/04/06/pKa-prediction-with-GNNs</id><content type="html" xml:base="http://karlleswing.com/2023/04/06/pKa-prediction-with-GNNs.html"><![CDATA[<h1 id="pka-prediction-with-graph-neural-networks">pKa Prediction with Graph Neural Networks</h1>
+
+<p style="text-align:center;"><img src="/assets/2023_04_06/epik7.webp" alt="Epik7" /></p>
+
+<p>Epik7 is a new machine learning model for predicting the pKa values and protonation states of complex, drug-like molecules.
+It is trained on over 42,000 pKa values from a variety of sources, and can accurately predict pKa values with median absolute and RMS errors of 0.42 and 0.72 pKa units.
+Epik7 can also generate protonation states, and recovers 95% of the most populated protonation states compared to previous versions.</p>
+
+<p>Epik7 can also be used to evaluate protonation states for crucial molecules and prepare ultra-large libraries of 
+compounds to explore vast regions of chemical space.</p>
+
+<p>Check out the full work <a href="https://pubs.acs.org/doi/abs/10.1021/acs.jctc.3c00044">here</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[pKa Prediction with Graph Neural Networks]]></summary></entry><entry><title type="html">QRNN for Liquid Electrolyte Simulation</title><link href="http://karlleswing.com/2022/08/16/QRNN-liquid-electrolytes.html" rel="alternate" type="text/html" title="QRNN for Liquid Electrolyte Simulation" /><published>2022-08-16T00:00:00+00:00</published><updated>2022-08-16T00:00:00+00:00</updated><id>http://karlleswing.com/2022/08/16/QRNN-liquid-electrolytes</id><content type="html" xml:base="http://karlleswing.com/2022/08/16/QRNN-liquid-electrolytes.html"><![CDATA[<h1 id="qrnn-for-liquid-electrolyte-simulation">QRNN for Liquid Electrolyte Simulation</h1>
+
+<p style="text-align:center;"><img src="/assets/2022_08_16/cluser_loop.gif" alt="QRNN" /></p>
+
+<p>Li-ion batteries are the workhorses of the modern world, powering everything from smartphones to electric cars. One of the key challenges to improving Li-ion batteries is developing better liquid electrolytes, which are the solutions that ions flow through inside the battery.</p>
+
+<p>To improve liquid electrolytes, we need to be able to accurately calculate their properties, such as viscosity and ionic diffusivity. However, traditional atomistic calculations are very computationally expensive and don’t have the accuracy required to make experimental decisions.</p>
+
+<p>We have trained a machine learning-based force field on a dataset of non-periodic DFT calculations. This allowed us to use a very accurate theory (ωB97X-D3BJ/def2-TZVPD) to train our model, which would be prohibitively expensive for generating large datasets with periodic DFT.</p>
+
+<p>We have tested our force field on seven common carbonates and LiPF6, and it was able to accurately predict the properties of these materials.
+We are hopeful that we can apply this kind of force field to a wide range of liquid electrolyte systems in the future.</p>
+
+<p>Check out the full work <a href="https://pubs.acs.org/doi/abs/10.1021/acs.jpcb.2c03746">here</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[QRNN for Liquid Electrolyte Simulation]]></summary></entry><entry><title type="html">Introducing the Charge Recursive Neural Network (QRNN)</title><link href="http://karlleswing.com/2022/03/22/QRNN.html" rel="alternate" type="text/html" title="Introducing the Charge Recursive Neural Network (QRNN)" /><published>2022-03-22T00:00:00+00:00</published><updated>2022-03-22T00:00:00+00:00</updated><id>http://karlleswing.com/2022/03/22/QRNN</id><content type="html" xml:base="http://karlleswing.com/2022/03/22/QRNN.html"><![CDATA[<h1 id="introducing-the-charge-recursive-neural-network-qrnn">Introducing the Charge Recursive Neural Network (QRNN)</h1>
+
+<p style="text-align:center;"><img src="/assets/2022_03_22/qrnn.gif" alt="QRNN" /></p>
+
+<p>In recent years, a new class of methods called neural network potentials (NNPs) has emerged as a promising 
+alternative to traditional force-fields.
+NNPs are trained on a dataset of reference calculations to learn the relationship between the atomic structure and the energy of a molecule.
+Once trained, NNPs can be used to simulate molecules much more efficiently than traditional methods.</p>
+
+<p>One of the challenges with NNPs is that they can be difficult to transfer to new types of molecules.
+We have developed a new NNP architecture called QRNN, which predicts atomic charges and uses these charges as descriptors in an energy model.
+We have shown that QRNN can accurately predict the conformational energies of ionic and zwitterionic druglike molecules with chemical accuracy.</p>
+
+<p>We believe that transferable NNPs have the potential to revolutionize drug discovery by making it possible to simulate large-scale ensembles of molecules at an unprecedented level of accuracy.
+This could lead to the discovery of new drugs more quickly and efficiently.</p>
+
+<p>Check out the full work <a href="https://pubs.acs.org/doi/abs/10.1021/acs.jctc.1c00821">here</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Introducing the Charge Recursive Neural Network (QRNN)]]></summary></entry><entry><title type="html">Book Chapter on Active Learning FEP</title><link href="http://karlleswing.com/2021/11/19/active-learning-fep-book-chapter.html" rel="alternate" type="text/html" title="Book Chapter on Active Learning FEP" /><published>2021-11-19T00:00:00+00:00</published><updated>2021-11-19T00:00:00+00:00</updated><id>http://karlleswing.com/2021/11/19/active-learning-fep-book-chapter</id><content type="html" xml:base="http://karlleswing.com/2021/11/19/active-learning-fep-book-chapter.html"><![CDATA[<p>I recently helped out on writing a book chapter on effective protocols for applying active learning to Free Energy 
+Calculations.</p>
+
+<h2 id="abstract">Abstract</h2>
+<p>Binding free energy predictions of small molecules are becoming increasingly impactful in drug discovery campaigns. By
+efficiently and reliably identifying potent and selective chemical matter, project teams can invest time and financial
+resources on the most promising design ideas and effectively explore the most relevant chemical space. A large pool of
+design ideas along with sufficient accuracy and throughput are all required for binding free energy predictions to
+accelerate drug discovery programs. In this chapter, we discuss how free energy calculations are being used at scale in
+our internal drug discovery teams and collaborations to positively impact project performance, and we highlight our
+experience with and best practices that are emerging for active learning FEP (AL-FEP), an approach that combines
+large-scale library enumerations, machine learning strategies, and free energy calculations to efficiently explore
+diverse chemical space.</p>
+
+<p>Check out the full chapter <a href="https://pubs.acs.org/doi/abs/10.1021/bk-2021-1397.ch008">here</a>.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I recently helped out on writing a book chapter on effective protocols for applying active learning to Free Energy Calculations.]]></summary></entry><entry><title type="html">Efficient Exploration with Docking and Deep Learning</title><link href="http://karlleswing.com/2021/03/21/efficient-exploration-with-docking-and-deep-learning.html" rel="alternate" type="text/html" title="Efficient Exploration with Docking and Deep Learning" /><published>2021-03-21T00:00:00+00:00</published><updated>2021-03-21T00:00:00+00:00</updated><id>http://karlleswing.com/2021/03/21/efficient-exploration-with-docking-and-deep-learning</id><content type="html" xml:base="http://karlleswing.com/2021/03/21/efficient-exploration-with-docking-and-deep-learning.html"><![CDATA[<p>I recently helped put out a preprint on combining active learning with docking for virtual screening applications.</p>
+
+<p><img src="/assets/2021_03_21/workflow.png" alt="assets/2021_03_21/workflow.png" /></p>
+
+<h2 id="abstract">Abstract</h2>
+
+<p>With the advent of make-on-demand commercial libraries, the number of purchasable compounds available for virtual
+screening and assay has grown explosively in recent years, with several libraries eclipsing one billion compounds.
+Today’s screening libraries are larger and more diverse, enabling discovery of more potent hit compounds and unlocking
+new areas of chemical space, represented by new core scaffolds. Applying physics-based in-silico screening methods in an
+exhaustive manner, where every molecule in the library must be enumerated and evaluated independently, is increasingly
+cost-prohibitive. Here, we introduce a protocol for machine learning-enhanced molecular docking based on active learning
+to dramatically increase throughput over traditional docking. We leverage a novel selection protocol that strikes a
+balance between two objectives: (1) Identifying the best scoring compounds and (2) exploring a large region of chemical
+space, demonstrating superior performance compared to a purely greedy approach. Together with automated redocking of the
+top compounds, this method captures nearly all the high scoring scaffolds in the library found by exhaustive docking.
+This protocol is applied to our recent virtual screening campaigns against the D4 and AMPC targets that produced dozens
+of highly potent, novel inhibitors, and a blinded test against the MT1 target. Our protocol recovers more than 80% of
+the experimentally confirmed hits with a 14-fold reduction in compute cost, and more than 90% of the hit scaffolds in
+the top 5% of model predictions, preserving the diversity of the experimentally confirmed hit compounds.</p>
+
+<p>Check out the preprint <a href="https://chemrxiv.
+org/engage/api-gateway/chemrxiv/assets/orp/resource/item/60c755bf842e65adc6db4393/original/efficient-exploration-of-chemical-space-with-docking-and-deep-learning.pdf">here</a>
+.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[I recently helped put out a preprint on combining active learning with docking for virtual screening applications.]]></summary></entry><entry><title type="html">Shut The Box</title><link href="http://karlleswing.com/2020/12/30/Shut-The-Box.html" rel="alternate" type="text/html" title="Shut The Box" /><published>2020-12-30T00:00:00+00:00</published><updated>2020-12-30T00:00:00+00:00</updated><id>http://karlleswing.com/2020/12/30/Shut-The-Box</id><content type="html" xml:base="http://karlleswing.com/2020/12/30/Shut-The-Box.html"><![CDATA[<h1 id="shut-the-box">Shut The Box</h1>
+
+<p><img src="/assets/2020_12_30/Shut_the_box.jpg" alt="Shut The Box" /></p>
+
+<p>For the holidays this year I received the game <a href="https://en.wikipedia.org/wiki/Shut_the_Box">Shut The Box</a>.
+The rules of the game are relatively simple, at the start of the game all tiles are “open”, showing the numbers 1 to 
+9 inclusive.
+The player then rolls two dice, and must “close” tile values equal to the number of pips showing on the dice.
+For example, if the total number of dots is 8, the player may choose any of the following sets of numbers</p>
+<ol>
+  <li>8</li>
+  <li>7, 1</li>
+  <li>6, 2</li>
+  <li>5, 3</li>
+  <li>5, 2, 1</li>
+  <li>4, 3, 1</li>
+</ol>
+
+<p>The player repeats this process unil they cannot satisfy their dice roll with the tiles left on the board.
+Their score is the sum of values remaining on the “open” tiles.
+After this the box is handed to the next player, the  winner of the round is the player with the fewest points.</p>
+
+<p>There are many variants or extensions described on the Wikipedia page, but this simple version is what I was playing 
+on Christmas day.
+After playing for a couple of hours while watching Christmas movies I had a couple of questions about the game.</p>
+
+<ol>
+  <li>What is the expected value of a game?</li>
+  <li>What is the best opening roll?</li>
+  <li>Is it ever in a players’ best interest to <strong>not</strong> close the largest tile they can?</li>
+  <li>What is the value of going second in a two player game?</li>
+</ol>
+
+<p>This is a small enough game that we can explicitly solve it for both the one player and two player cases.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="n">copy</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c1"># Map from Dice Roll To Probability of it Happening over Two Dice
+</span><span class="n">dice_probs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">d1</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">d2</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dice_probs</span><span class="p">:</span>
+            <span class="n">dice_probs</span><span class="p">[</span><span class="n">total</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">dice_probs</span><span class="p">[</span><span class="n">total</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">36.0</span>
+
+<span class="c1"># Map From Dice Roll To Possible Tiles to Flip Down
+</span><span class="n">tile_lookup</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="n">tiles</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+<span class="n">tile_values</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">elem</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">tile_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">total</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="n">tile_lookup</span><span class="p">[</span><span class="n">total</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">valid_move</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param move: list of int, tiles to attempt to flip down
+    :param tiles: list of int, tiles currently on the board
+    :return: Bool is the move valid for tiles on the board
+    </span><span class="sh">"""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">move</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">move</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">def</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param move: list of int, tiles to attempt to flip down
+    :param tiles: list of int, tiles currently on the board
+    :return: list of int, the new board
+    </span><span class="sh">"""</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">move</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">move</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">retval</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param tiles: list of int, tiles currently on the board
+    :return: int the score of the board
+    </span><span class="sh">"""</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="k">def</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param tiles: list of int, tiles currently on the board
+    :param roll: int, the roll for the player
+    :return: list of list of int, legal moves for this board state with this roll
+    </span><span class="sh">"""</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">tile_lookup</span><span class="p">[</span><span class="n">roll</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">valid_move</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">move</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retval</span>
+
+<span class="c1"># Store expected value in [(board_state, roll)] with roll==0 being the player not having rolled yet
+</span><span class="n">memoize</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">empty_board</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="n">memoize</span><span class="p">[(</span><span class="n">empty_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)</span> <span class="ow">in</span> <span class="n">memoize</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">roll</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">my_roll</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">dice_probs</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">my_roll</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span>
+        <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">total</span>
+        <span class="k">return</span> <span class="n">total</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+        <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">)</span>
+        <span class="n">roll_score</span> <span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+    <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">):</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">)</span>
+    <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">best_score</span>
+    <span class="k">return</span> <span class="n">best_score</span>
+<span class="n">full_board</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="nf">dfs</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now that we have a calculated optimal value function for the expected value of a game we can answer some of my 
+questions from above.
+With the exact value function we can loop over actions to find an optimal policy for expected value.</p>
+
+<h3 id="what-is-the-expected-value-for-the-game">What is the expected value for the game?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">dfs</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></div></div>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">11.</span>157508444202621
+</code></pre></div></div>
+
+<h3 id="what-is-the-best-opening-roll">What is the best opening roll?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">memoize</span><span class="p">[(</span><span class="n">full_board</span><span class="p">,</span> <span class="n">i</span><span class="p">)]])</span>
+<span class="n">retval</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">retval</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">retval</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[9, 7.6236893875640135]
+[8, 9.24080617861096]
+[12, 9.936173208638165]
+[7, 10.825008858089767]
+[10, 11.139918487467915]
+[11, 11.194009457452708]
+[6, 11.726631321763904]
+[5, 12.514746172581951]
+[4, 13.706206147751468]
+[3, 14.31391370496678]
+[2, 15.838927661162352]
+</code></pre></div></div>
+
+<p>The best roll by far is a 9.  The worst roll is a 2.</p>
+
+<h3 id="is-it-ever-in-a-players-best-interest-to-not-close-the-largest-tile-they-can">Is it ever in a players’ best interest to <strong>not</strong> close the largest tile they can?</h3>
+
+<p>To answer this question we have to look over all 2**9 possible board states and evaluate if the Greedy move is 
+the same as the best move.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">to_bin</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    param l: list of int, the board state
+    return: int the binary representation of the board state
+    </span><span class="sh">"""</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="nf">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">exceptions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">board_state</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nf">sum</span><span class="p">(</span><span class="n">board_state</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">best_move</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+            <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">roll_score</span> <span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+                <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+        
+        <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">continue</span>
+        
+        <span class="n">biggest_move</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">roll</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">to_bin</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">biggest_move</span> <span class="o">!=</span> <span class="n">best_move</span><span class="p">:</span>
+            <span class="n">better_option</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">best_move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">greedy_option</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">biggest_move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">exceptions</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="nf">pretty_print_roll</span><span class="p">(</span><span class="n">board_state</span><span class="p">),</span> <span class="n">roll</span><span class="p">,</span> <span class="nf">pretty_print_roll</span><span class="p">(</span><span class="n">best_move</span><span class="p">),</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">better_option</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">greedy_option</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+
+            <span class="n">exceptions</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">exceptions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Number of exceptions: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">exceptions</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">exceptions</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">Board</span><span class="sh">"</span><span class="p">,</span> <span class="sh">'</span><span class="s">Roll</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Best Move</span><span class="sh">'</span><span class="p">,</span> <span class="sh">"</span><span class="s">Expected Value</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Greedy Value</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">df</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of exceptions: 210
+Board	Roll	Best Move	Expected Value	Greedy Value
+0	1,2,3,4,7,	12	2,3,7,	4.111111	4.214506
+1	1,2,3,4,5,6,	12	3,4,5,	4.524691	4.638117
+2	1,2,4,5,6,	12	2,4,6,	4.611111	4.763889
+3	1,3,4,5,6,	12	3,4,5,	5.000000	5.300926
+4	1,2,3,4,6,	11	2,3,6,	4.111111	4.214506
+</code></pre></div></div>
+
+<p>So out of the (10 Dice Rolls) * (512 Tile States) = 5120 game states it is advantageous to not play greedily in 210 
+circumstances.
+The largest difference in expected value though from these changes is 0.1 points.</p>
+
+<p>Let’s assume the players are playing without knowledge of each other’s scores and simply play to optimize expected 
+value or to play the greedy move, how big a difference does it make?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_move_best</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">):</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">best_move</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">possible_moves</span><span class="p">:</span>
+        <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+        <span class="n">roll_score</span> <span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+            <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+    <span class="k">return</span> <span class="n">best_move</span>
+
+<span class="k">def</span> <span class="nf">get_move_greedy</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">possible_moves</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">to_bin</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="sh">"</span><span class="s">best</span><span class="sh">"</span><span class="p">):</span>
+    <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+        
+        <span class="n">possible_moves</span> <span class="o">=</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">d1</span><span class="o">+</span><span class="n">d2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">possible_moves</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span><span class="o">==</span><span class="sh">'</span><span class="s">best</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="nf">get_move_best</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span><span class="o">==</span><span class="sh">'</span><span class="s">greedy</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="nf">get_move_greedy</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">)</span>
+        <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">my_tiles</span><span class="p">)</span>
+
+<span class="n">games_played_ev</span> <span class="o">=</span> <span class="p">[</span><span class="nf">simulate</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)]</span>
+<span class="n">games_played_greedy</span> <span class="o">=</span> <span class="p">[</span><span class="nf">simulate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="sh">'</span><span class="s">greedy</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<p>Overlaying the probability distributions leads to small differences, but they could simply be sampling errors.</p>
+
+<p><img src="/assets/2020_12_30/greedy_distribution.png" alt="Distributions" /></p>
+
+<p>Viewing their probability distribution functions and cumulative distribution functions has similar conclusions.</p>
+
+<p><img src="/assets/2020_12_30/greedy_pdf.png" alt="Distributions" /></p>
+
+<p>However a one sided KS test shows statistically significant differences in their distributions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scipy.stats</span> <span class="kn">import</span> <span class="n">kstest</span>
+<span class="nf">kstest</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">games_played_greedy</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="sh">'</span><span class="s">greater</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KstestResult(statistic=0.018660000000000065, pvalue=7.412305228600443e-16)
+</code></pre></div></div>
+
+<p>The longer you play though the more the small differences start to matter.
+We can say a day of playing this game is around 20 rounds.
+How much does this difference in policy effect the likelihood of winning any given day?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">num_wins</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">num_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">day_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1_000</span><span class="p">):</span>
+    <span class="n">ev_scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">greedy_scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_greedy</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">wins</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">ev_scores</span> <span class="o">&lt;</span> <span class="n">greedy_scores</span><span class="p">)</span>
+    <span class="n">losses</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">ev_scores</span> <span class="o">&gt;</span> <span class="n">greedy_scores</span><span class="p">)</span>
+    <span class="n">num_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+    <span class="n">num_wins</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">wins</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">wins</span> <span class="o">&gt;</span> <span class="n">losses</span><span class="p">:</span>
+        <span class="n">day_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">win</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">losses</span> <span class="o">&gt;</span> <span class="n">wins</span><span class="p">:</span>
+        <span class="n">day_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">loss</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">losses</span> <span class="o">==</span> <span class="n">wins</span><span class="p">:</span>
+        <span class="n">day_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">tie</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">day_results</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">day_results</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="sh">'</span><span class="s">Expected Value Win Day</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">day_results</span><span class="o">==</span><span class="sh">'</span><span class="s">win</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])],</span>
+  <span class="p">[</span><span class="sh">'</span><span class="s">Greedy Win Day</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">day_results</span><span class="o">==</span><span class="sh">'</span><span class="s">loss</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])],</span>
+  <span class="p">[</span><span class="sh">'</span><span class="s">Tie</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">day_results</span><span class="o">==</span><span class="sh">'</span><span class="s">tie</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="p">]</span>
+<span class="n">plt_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Winning The Day With Different Strategies</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt_df</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Result</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Count</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">sns</span><span class="p">.</span><span class="nf">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">plt_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">'</span><span class="s">Result</span><span class="sh">'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">Count</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Result</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Expected Value Win Day</td>
+      <td>493</td>
+    </tr>
+    <tr>
+      <td>Greedy Win Day</td>
+      <td>407</td>
+    </tr>
+    <tr>
+      <td>Tie</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/2020_12_30/ev_day_wins.png" alt="EV Day Wins" /></p>
+
+<p>This difference in strategy means winning ~9% more days than just playing greedily. 
+Not so small a difference after all!</p>
+
+<h3 id="what-is-the-value-of-going-second-in-a-two-player-game">What is the value of going second in a two player game?</h3>
+
+<p>This is slightly a harder question to answer.
+In order to do this we have to make a couple of assumptions.</p>
+
+<ul>
+  <li>The first player to roll plays optimally for expected value number of points.
+    <ul>
+      <li>I believe this is <strong>not</strong> the optimal strategy to <strong>win</strong> in a two player game</li>
+      <li>A simple thought experiment for a 100 person game shows that it probably is not the best strategy, one should be 
+more risky in an attempt to get a good score.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>We can represent this difference in policy by calculating the difference in win, loss and tie rate between an 
+expected value player playing against themselves, vs playing an optimized player 2 player knowing what score they 
+have to beat.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">P2Policy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span> <span class="o">=</span> <span class="n">to_beat</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">losses</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">ties</span> <span class="o">=</span> <span class="bp">None</span>
+        
+    <span class="k">def</span> <span class="nf">create_policy</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">full_board</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">):</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">roll</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">my_roll</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">dice_probs</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">my_roll</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span>
+            <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">total</span>
+            <span class="k">return</span> <span class="n">total</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+            <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">)</span>
+            <span class="n">roll_score</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+        <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">score_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">to_beat</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">best_score</span>
+        <span class="k">return</span> <span class="n">best_score</span>
+
+    <span class="k">def</span> <span class="nf">get_stats</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">losses</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">ties</span> <span class="o">/</span> <span class="mi">10_000</span>
+        <span class="n">wins</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">ties</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">simulate</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">:</span>
+                <span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">:</span>
+                <span class="n">losses</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">:</span>
+                <span class="n">ties</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">losses</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">ties</span> <span class="o">=</span> <span class="n">wins</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">ties</span>
+        <span class="k">return</span> <span class="n">wins</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">losses</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">ties</span> <span class="o">/</span> <span class="mi">10_000</span>
+    
+    <span class="k">def</span> <span class="nf">get_move_best</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">board_state</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">):</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">best_move</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">possible_moves</span><span class="p">:</span>
+            <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">roll_score</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+                <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+        <span class="k">return</span> <span class="n">best_move</span>
+
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+
+            <span class="n">possible_moves</span> <span class="o">=</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">d1</span><span class="o">+</span><span class="n">d2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">possible_moves</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">)</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_move_best</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">)</span>
+            <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">my_tiles</span><span class="p">)</span>
+
+
+<span class="c1"># Calculate the PDF of expected value scores
+</span><span class="n">expected_value_score_pdf</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">my_games</span> <span class="o">=</span> <span class="nf">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">games_played_ev</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">i</span><span class="p">])</span>
+  <span class="n">expected_value_score_pdf</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">my_games</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">))</span>
+
+<span class="c1"># Caculate the win, loss, draw rate of P2
+</span><span class="n">total_win</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">,</span> <span class="n">total_tie</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">policies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Calculating Policy for </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+  <span class="n">policy</span> <span class="o">=</span> <span class="nc">P2Policy</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+  <span class="n">policies</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+
+  <span class="n">w</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">policy</span><span class="p">.</span><span class="nf">get_stats</span><span class="p">()</span>
+  <span class="n">prob_of_case</span> <span class="o">=</span> <span class="n">expected_value_score_pdf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">total_win</span> <span class="o">+=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">prob_of_case</span>
+  <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">l</span> <span class="o">*</span> <span class="n">prob_of_case</span>
+  <span class="n">total_tie</span> <span class="o">+=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">prob_of_case</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">total_win</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">,</span> <span class="n">total_tie</span><span class="p">)</span>
+
+<span class="c1"># Calculate Self Interactions
+</span><span class="n">size</span><span class="o">=</span><span class="mi">1_000_000</span>
+<span class="n">g1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">self_wins</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">g1</span> <span class="o">&gt;</span> <span class="n">g2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">self_loss</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">g1</span> <span class="o">&lt;</span> <span class="n">g2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">self_tie</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">g1</span> <span class="o">==</span> <span class="n">g2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">self_wins</span> <span class="o">/</span> <span class="n">size</span><span class="p">,</span> <span class="n">self_loss</span> <span class="o">/</span> <span class="n">size</span><span class="p">,</span> <span class="n">self_tie</span> <span class="o">/</span> <span class="n">size</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mf">0.477316</span><span class="p">,</span> <span class="mf">0.477553</span><span class="p">,</span> <span class="mf">0.045129</span>
+<span class="mf">0.479137</span><span class="p">,</span> <span class="mf">0.479201</span><span class="p">,</span> <span class="mf">0.041662</span>
+</code></pre></div></div>
+
+<p>These values are within sampling error. The value of going second is either zero or small enough to be not 
+accurately sampled using the methods above.  This is a surprising result! An explanation for this is there is no 
+such thing as a “risky” move, that is a move with higher variance or better extreme value but with worse expected 
+value. We could further compare the actual policies generated instead of the end game results sampled.  We could 
+also explicitly calculate the tie, win and loss percentages for a given p2 strategy instead of sampling it. However, 
+to remove all the sampling error we would have to explicitly calculate the optimal expected strategy points 
+probability distribution function also.</p>
+
+<p>This was an interesting game to study, simple enough to calculate explicit solutions and perfectly solve, yet 
+intricate enough to have some novel strategy. It would be fun to hook up <a href="https://arxiv.org/pdf/2007.13544.
+pdf">ReBel</a> to play around with the codebase.  I’m not sure if the method can work with stocastic environments though.  If 
+you want to look through the full jupyter notebook analysis it is on my <a href="https://github.
+com/lilleswing/riddler/blob/master/shut_the_box/shut_the_box.ipynb">github</a>.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Shut The Box]]></summary></entry><entry><title type="html">Covid Test Pooling</title><link href="http://karlleswing.com/2020/06/29/Covid-Test-Pooling.html" rel="alternate" type="text/html" title="Covid Test Pooling" /><published>2020-06-29T00:00:00+00:00</published><updated>2020-06-29T00:00:00+00:00</updated><id>http://karlleswing.com/2020/06/29/Covid-Test-Pooling</id><content type="html" xml:base="http://karlleswing.com/2020/06/29/Covid-Test-Pooling.html"><![CDATA[<h1 id="test-pooling">Test Pooling</h1>
+
+<p>I thought that <a href="https://www.cnn.com/2020/06/26/politics/anthony-fauci-testing-coronavirus-task-force/index.html">test pooling</a> was a cool and clever idea after Fauci said that the task force was seriously considering it.
+To my understanding test pooling is mixing in multiple samples and then running them through the assay machine together.  The advantage of this would be that if everyone in the pool was negative the machine would read negative and you would get an <em>n</em> time speedup through the machine.  In Fauci’s briefing he said machines could handle up to 10 samples at a time.
+If a test came up positive you would then one at a time go through the members of the pool and retest them.
+With a low enough background rate and a correct size pool we can test more people with the same number of assay machines.
+However it would come at the cost of 2x the number of swabs per person – or requiring people to come back to give a second swab after the initial test came back positive.</p>
+
+<p>I wanted to get an upper bound for how much a strategy like this could help so I simulated it out.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="n">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">wilson_cc_confidence</span><span class="p">(</span><span class="n">hits</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param hits: number Number of actives
+    :param num_samples: number Number of total samples
+    :param alpha: 1 - confidence interval size
+    :return: (confidence_low, confidence_high)
+    get confidence limits for proportion
+    using wilson score method w/ cont correction
+    i.e. Method 4 in Newcombe [1];
+    </span><span class="sh">"""</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">num_samples</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">hits</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">p</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="n">norm</span><span class="p">.</span><span class="nf">isf</span><span class="p">(</span><span class="n">alpha</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">z2</span><span class="p">)</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="n">z2</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">z</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">z2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">p</span> <span class="o">*</span>
+                                             <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">ci_l</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="n">z2</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">z</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">z2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">p</span> <span class="o">*</span>
+                                             <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">ci_u</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ci_l</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">elif</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ci_u</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="k">return</span> <span class="n">ci_l</span><span class="p">,</span> <span class="n">ci_u</span>
+
+<span class="k">def</span> <span class="nf">bootstrap_confidence</span><span class="p">(</span><span class="n">hits</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
+    <span class="n">hit_bs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">hits</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">samples</span> <span class="o">-</span>  <span class="n">hits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">):</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+        <span class="n">hit_bs</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">/</span><span class="n">samples</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">percentile</span><span class="p">(</span><span class="n">hit_bs</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">percentile</span><span class="p">(</span><span class="n">hit_bs</span><span class="p">,</span> <span class="mi">95</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Runner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">background_rate</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">background_rate</span> <span class="o">=</span> <span class="n">background_rate</span>
+
+    <span class="k">def</span> <span class="nf">run_many_trials</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">10_000</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">):</span>
+            <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">run_trial</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span>
+        <span class="n">avg_tests</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="n">tests_per_person</span> <span class="o">=</span> <span class="n">avg_tests</span> <span class="o">/</span> <span class="n">batch_size</span>
+        <span class="k">return</span> <span class="n">tests_per_person</span>
+        
+        
+    <span class="k">def</span> <span class="nf">create_infections</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">background_rate</span>
+        <span class="k">return</span> <span class="n">v</span>
+    
+    <span class="k">def</span> <span class="nf">run_trial</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">people</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">create_infections</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">sum</span><span class="p">(</span><span class="n">people</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">batch_size</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">batch_size</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">run_many_trials</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">results</span><span class="p">),</span> <span class="n">results</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runner</span> <span class="o">=</span> <span class="nc">Runner</span><span class="p">(</span><span class="mf">0.03</span><span class="p">)</span>
+<span class="n">ttp</span><span class="p">,</span> <span class="n">plt_data</span> <span class="o">=</span> <span class="n">runner</span><span class="p">.</span><span class="nf">run</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Avg Tests Per Person vs Pool Size</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Pool Size</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Avg Tests Per Person</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">plt_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/2020_06_29/output_5_1.png" alt="png" /></p>
+
+<h3 id="assumptions">Assumptions</h3>
+
+<ul>
+  <li>3% of the country has Covid right now</li>
+</ul>
+
+<p>This is a number that I kinda made up.  Later we are going to get a couple of different ways that we can estimate this.</p>
+
+<ul>
+  <li>We know nothing about an individual that would increase or decrease this background rate – (the samples are <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables">i.i.d</a>)</li>
+</ul>
+
+<p>In an ideal pooling strategy we have an oracle who knows apriori whether an individual has Covid or not.  If we know this we can send positive patients through one at a time and then negative patients through 10 at a time.  As the background rate decreases we want to increase pool size.  For all analysis here we assume that the patient outcomes are independent and identically distributed random variables.  We know this is not true.  We can easily condition these probabilities on a questionnaire, to get better results.</p>
+
+<p>With these settings we should set a batch size of 6 to only require ~1/3 of a test per person.  That is a pretty big speedup for relatively little work!  Also because of (2) that this assumes i.i.d this is an upper bound estimate of the testing efficiency speed up.</p>
+
+<h3 id="is-3-testing-positive-today-06292020-a-good-guess">Is 3% Testing Positive today (06/29/2020) a good guess?</h3>
+
+<p>The NBA is returning to soon, and as a preliminary step tested all of the players who will play in Orlando.  In the tests 16 or 302 players tested positive.  This is a good sample in the fact that these players were selected not because they had symptoms but instead they were chosen independent of showing symptoms.  There are a number of reasons that the rate of NBA players might not be representative of the country as a whole but lets ignore that for now and take a 95% confidence interval of the true rate of NBA players assuming i.i.d and use that as bounds for the U.S.</p>
+
+<p>Here we will use the <a href="https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#:~:text=a%20score%20test.-,Wilson%20score%20interval%20with%20continuity%20correction,probability%2C%20with%20the%20nominal%20value.">Wilson Score Interval With Continuity Correction</a> and a <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)#Deriving_confidence_intervals_from_the_bootstrap_distribution">bootstrap confidence interval</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Wilson CC Confidence Interval </span><span class="si">{</span><span class="nf">wilson_cc_confidence</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">302</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Bootstrap Confidence Interval </span><span class="si">{</span><span class="nf">bootstrap_confidence</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">302</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Wilson CC Confidence Interval (0.031596180714027575, 0.08630723905083608)
+Bootstrap Confidence Interval (0.033112582781456956, 0.076158940397351)
+</code></pre></div></div>
+
+<p>So using this data we can estimate that the background rate is ~[3.1%-8.7%].  This is more dire than my initial gut estimate.  What happens to our testing efficiency in this regime?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">background_rates</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.087</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">efficiencies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">rate</span> <span class="ow">in</span> <span class="n">background_rates</span><span class="p">.</span><span class="nf">tolist</span><span class="p">():</span>
+    <span class="n">runner</span> <span class="o">=</span> <span class="nc">Runner</span><span class="p">(</span><span class="n">rate</span><span class="p">)</span>
+    <span class="n">efficiencies</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">runner</span><span class="p">.</span><span class="nf">run</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Tests Per Person By Background Covid Rate</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Background USA Covid Rate</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Tests Required Per Person</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">background_rates</span><span class="p">,</span> <span class="n">efficiencies</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">tests_per_person_by_Covid_rate.png</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/2020_06_29/output_10_0.png" alt="png" /></p>
+
+<h2 id="testing-efficiency-not-nearly-as-good">Testing Efficiency Not Nearly As Good</h2>
+
+<p>So as the background rate of Covid goes up testing efficiency via pooling decreases quickly.  Reminder this is with the assumption that every person has an equal probability of testing positive for Covid.  In order for us to make this strategy useful with background rates at this level we need to have higher fidelity guesses per patient of their likelihood of testing positive for Covid.  With that information we can run pools with all individuals with low probability of testing positive which can raise efficiency of the process overall.  In summary I was a bit disappointed by the back of the envelope efficiencies gained from this process, when I heard about it on the news my gut assumption is it could lead to 5x test efficiency improvement.  This is still possible – just not with a naive implementation randomly putting people from all across the country into a testing pools.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Test Pooling]]></summary></entry><entry><title type="html">Set Trainer</title><link href="http://karlleswing.com/2020/05/03/SetTrainer.html" rel="alternate" type="text/html" title="Set Trainer" /><published>2020-05-03T00:00:00+00:00</published><updated>2020-05-03T00:00:00+00:00</updated><id>http://karlleswing.com/2020/05/03/SetTrainer</id><content type="html" xml:base="http://karlleswing.com/2020/05/03/SetTrainer.html"><![CDATA[<p>Since high school I have been bad at the board game <a href="https://en.wikipedia.org/wiki/Set_(card_game)">Set</a>.</p>
+
+<p>In set there are 81 cards and each card has four attributes.</p>
+
+<ol>
+  <li>Number [1,2,3]</li>
+  <li>Shape [oval, diamond, squiggle]</li>
+  <li>Color [red, green, purple]</li>
+  <li>Shading [solid, lined, outlined]</li>
+</ol>
+
+<p>The goal of the game is to collect bags of three cards where each attribute either has all of one type, or one of each.</p>
+
+<p>In order to get better I made a simple matching game – the goal is to select the card which finishes the set for two given query cards.</p>
+
+<p><img src="/assets/2020_05_03/screen_shot.png" alt="Screen Shot" /></p>
+
+<p>It times how long it takes to make 20 matches.</p>
+
+<p>You can play for yourself <a href="https://lilleswing.github.io/set-trainer/">here</a>.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Since high school I have been bad at the board game Set.]]></summary></entry></feed>

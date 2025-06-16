@@ -11,6 +11,8 @@ services:
     environment:
       UID: ${UID}
       GID: ${GID}
+      HOME: /app
+      BUNDLE_PATH: /app/vendor/bundle
     command: >
       bash -c "
         bundle install &&

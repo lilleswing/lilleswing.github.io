@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>March Madness With Dense Neural Networks | Karl Leswing</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="March Madness With Dense Neural Networks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Updated Version for 2018" />
+<meta property="og:description" content="Updated Version for 2018" />
+<link rel="canonical" href="http://karlleswing.com/2013/04/18/march-madness-2013.html" />
+<meta property="og:url" content="http://karlleswing.com/2013/04/18/march-madness-2013.html" />
+<meta property="og:site_name" content="Karl Leswing" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-04-18T19:13:31+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="March Madness With Dense Neural Networks" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2013-04-18T19:13:31+00:00","datePublished":"2013-04-18T19:13:31+00:00","description":"Updated Version for 2018","headline":"March Madness With Dense Neural Networks","mainEntityOfPage":{"@type":"WebPage","@id":"http://karlleswing.com/2013/04/18/march-madness-2013.html"},"url":"http://karlleswing.com/2013/04/18/march-madness-2013.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://karlleswing.com/feed.xml" title="Karl Leswing" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Karl Leswing</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/posts/">Posts</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">March Madness With Dense Neural Networks</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2013-04-18T19:13:31+00:00" itemprop="datePublished">Apr 18, 2013
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="http://karlleswing.com/2018/03/12/MarchMadness-2018.html">Updated Version for 2018</a></p>
+
+<p>Every year since 2008, I have attempted to implement some kind of trained machine learning algorithm to create my March Madness Bracket.
+This year I used <a href="http://en.wikipedia.org/wiki/Neural_network"> Neural Networks </a>.
+All source code used for this project can be found <a href="https://github.com/lilleswing/March-Madness"> here </a>.
+Below is my finalized bracket and earlier versions of my network predicting the tournament.
+<img class="aligntop" src="/assets/march-madness-2013/Monday.png" width="1000" height="600" alt="" />
+<br /><br /></p>
+<h3>Data Abstraction</h3>
+<p>All data for this project was purchased from <a href="http://kenpom.com"> kenpom </a>.
+He has a wealth of good information and summary statistics about College Basketball.
+<br /><br />
+I decided to represent teams as a 30 tuple of the 30 statistics that kenpom finds most important.  Among them are …
+<br />
+<br /></p>
+<ul>
+<li>Tempo</li>
+<li>Adjusted Tempo</li>
+<li>Offensive Efficiency</li>
+<li>Adjusted Offensive Efficiency</li>
+<li>Defensive Efficiency</li>
+<li>Adjusted Defensive Efficiency</li>
+<li>Pythagorean Strength of Schedule</li>
+<li>Effective Field Goal Percentage</li>
+<li>Effective Field Goal Percentage</li>
+<li>Turnover Percentage</li>
+<li>Offensive Rebounding Percentage</li>
+<li>Free Throw Rate</li>
+<li>Effective Field Goal Percentage Against</li>
+<li>Effective Field Goal Percentage Against</li>
+<li>Turnover Percentage Against</li>
+<li>Offensive Rebounding Percentage Against</li>
+<li>Free Throw Rate Against</li>
+<li>3 Point Percentage</li>
+<li>2 Point Percentage</li>
+<li>Free Throw Percentage</li>
+<li>Block Percentage</li>
+<li>Steal Percentage</li>
+<li>Assist Percentage</li>
+<li>3 Point Assist Percentage</li>
+</ul>
+<p><br />
+For more information of what any of these values actually mean please refer to <a href="http://kenpom.com"> kenpom </a>.
+The beauty of Neural Networks is that I don’t really have to know what these values are, all I have to know is that they represent a team.
+Before storing any of these values I normalize them to have a mean of zero and a standard deviation of one.
+While this is technically unnecessary it means that the network can train quicker.
+<br /><br />
+A game is a 60 tuple, that is the 30 tuple of one team followed by another.  Based on this I can create my Network Topology.
+<br />
+Since a game is a 60 tuple I can define my neural network to have 60 nodes as its input layer.
+I then arbitrarily decided on having two hidden layers of size 100 using the Tanh function.
+Finally there is one output node, if it is less then zero the first team wins, greater then zero the second team wins.
+To be fair to both teams I put all games in twice, once with each team being the first 30 tuples, I then take an average of the results.
+This is for both training and playing the tourney.
+I played around with the idea with the home team getting to be the first 30 tuples, thereby putting home field advantage into the system,
+however I was unable to implement this due to time constraints. <br /> <br />
+The only human intervention given to this system was rating strength of a win.  I consulted a friend, Nish Trivedi, about how to measure win strength.
+We ended up on a simple step function.</p>
+<table border="1">
+<tr>
+<td>Point Range</td>
+<td>Output Layer Value</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0.0</td>
+<td>Tie</td>
+</tr>
+<tr>
+<td>[1-4]</td>
+<td>0.5</td>
+<td>Could of Gone Either Way</td>
+</tr>
+<tr>
+<td>[5-9]</td>
+<td>0.9</td>
+<td>Good Win</td>
+</tr>
+
+<tr>
+<td>[10-14]</td>
+<td>1.3</td>
+<td>Strong Win</td>
+</tr>
+
+<tr>
+<td>[15-inf]</td>
+<td>2</td>
+<td>Slaughter</td>
+</tr>
+</table>
+
+<h3>Implementation</h3>
+<p>I used python to implement this solution end to end.
+I scraped data from kenpom with the python <a href="http://docs.python-requests.org/en/latest/"> requests </a> library.
+I grabbed the cookie from my chrome session, and spoofed the rest of the headers.<br />
+I accidentally uploaded my session cookie into github, don’t worry I have already invalidated it.
+For Data Persistence I used sqlite3.
+This wasn’t necessarily necessary as the data model is simple, and everything easily fits into memory on my laptop,
+but I feel like it simplified by DAO a little bit.  It also made it a lot easier to transition from just using 2013 data to using data
+from all the way back to 2010. <br />
+To create the images I used the python image library (PIL).
+I actually had to re-compile PIL with libfreetype to get the images to be a little more readable on smaller screens.
+The hosting of PIL decided to go down on 3/13/13 just when I was doing it so I had to spend a day without PIL.<br />
+For the Neural Network I used the pybrain library.  The pybrain library is a python implementation of a lot of Machine learning
+algorithms.  It is intended to be used as a proof of concept framework, and is not fast.
+Because of this I have been training my system since 3/13/2013.
+I added to the data set on the already partially stabilized network as it came in.
+It has not yet reached convergence.
+With this Network it was able to predict 14027 out of 17459 games in its training set correctly.
+I know its bad form to evaluate on the same
+data set as train, but I did not have enough time to do both, and I would rather have a bracket then statistics about how good my bracket
+could be :).
+<br /><br /></p>
+<h3>Possible Improvements</h3>
+<p>My model of a team is frankly not very good.  It does not incorporate individual player match ups, injuries or how the team has done recently.
+A great way to improve it would be to model the team in aggregate as well as the players.
+A way I could do this would be to define each player as a tuple, and append a certain fixed number of them to the end of the team tuple in a 
+known ordering.
+Example orders would be by points scored, or minutes played.
+With this in place I could quickly remove players from my system if they get injured or suspended right before the tournament. <br />
+Another issue is a team the first week in the season is not the same team as the last week, right before the tournament.
+To show this I could implement the 30 tuple of a team as a sliding window of recent
+history directly before the game being played, or placing weighting functions on previous games based on how long ago they happened.
+All of these improvements would require a much more complicated data model, and for me to start persisting data WAY earlier then I did.
+<br /><br /></p>
+<h3>A Note On Using My Code</h3>
+<p><a href="https://github.com/lilleswing/March-Madness">github link</a><br /></p>
+
+<p>Due to legal restrictions I am not allowed to broadcast kenpom’s data to a general audience.
+However I am allowed to give it to specific third parties.
+In the github I have my sqlite3 database with all the data encrypted with a one time pad.
+If you e-mail me I will send you the one time pad file, and then you can get the original DB in the right place with the following function.</p>
+
+  </div><a class="u-url" href="/2013/04/18/march-madness-2013.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Karl Leswing</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Karl Leswing
+            
+            </li>
+            
+            <li><a href="mailto:lilleswing@gmail.com">lilleswing@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/lilleswing"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">lilleswing</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/karl_leswing"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">karl_leswing</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+            <img src=https://imgs.xkcd.com/comics/here_to_help.png title="&quot;We TOLD you it was hard.&quot; &quot;Yeah, but now that I&#39;VE tried, we KNOW it&#39;s hard.&quot;" alt="Here to Help" srcset="//imgs.xkcd.com/comics/here_to_help_2x.png 2x"/>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

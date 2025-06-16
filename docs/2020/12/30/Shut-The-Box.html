@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Shut The Box | Karl Leswing</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Shut The Box" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Shut The Box" />
+<meta property="og:description" content="Shut The Box" />
+<link rel="canonical" href="http://karlleswing.com/2020/12/30/Shut-The-Box.html" />
+<meta property="og:url" content="http://karlleswing.com/2020/12/30/Shut-The-Box.html" />
+<meta property="og:site_name" content="Karl Leswing" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-30T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Shut The Box" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-12-30T00:00:00+00:00","datePublished":"2020-12-30T00:00:00+00:00","description":"Shut The Box","headline":"Shut The Box","mainEntityOfPage":{"@type":"WebPage","@id":"http://karlleswing.com/2020/12/30/Shut-The-Box.html"},"url":"http://karlleswing.com/2020/12/30/Shut-The-Box.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://karlleswing.com/feed.xml" title="Karl Leswing" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Karl Leswing</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/posts/">Posts</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<article class="post">
+
+  <!--<header class="post-header">
+    <h1 class="post-title">Shut The Box</h1>
+  </header>-->
+
+  <div class="post-content">
+    <h1 id="shut-the-box">Shut The Box</h1>
+
+<p><img src="/assets/2020_12_30/Shut_the_box.jpg" alt="Shut The Box" /></p>
+
+<p>For the holidays this year I received the game <a href="https://en.wikipedia.org/wiki/Shut_the_Box">Shut The Box</a>.
+The rules of the game are relatively simple, at the start of the game all tiles are “open”, showing the numbers 1 to 
+9 inclusive.
+The player then rolls two dice, and must “close” tile values equal to the number of pips showing on the dice.
+For example, if the total number of dots is 8, the player may choose any of the following sets of numbers</p>
+<ol>
+  <li>8</li>
+  <li>7, 1</li>
+  <li>6, 2</li>
+  <li>5, 3</li>
+  <li>5, 2, 1</li>
+  <li>4, 3, 1</li>
+</ol>
+
+<p>The player repeats this process unil they cannot satisfy their dice roll with the tiles left on the board.
+Their score is the sum of values remaining on the “open” tiles.
+After this the box is handed to the next player, the  winner of the round is the player with the fewest points.</p>
+
+<p>There are many variants or extensions described on the Wikipedia page, but this simple version is what I was playing 
+on Christmas day.
+After playing for a couple of hours while watching Christmas movies I had a couple of questions about the game.</p>
+
+<ol>
+  <li>What is the expected value of a game?</li>
+  <li>What is the best opening roll?</li>
+  <li>Is it ever in a players’ best interest to <strong>not</strong> close the largest tile they can?</li>
+  <li>What is the value of going second in a two player game?</li>
+</ol>
+
+<p>This is a small enough game that we can explicitly solve it for both the one player and two player cases.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="n">copy</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c1"># Map from Dice Roll To Probability of it Happening over Two Dice
+</span><span class="n">dice_probs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">d1</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">d2</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dice_probs</span><span class="p">:</span>
+            <span class="n">dice_probs</span><span class="p">[</span><span class="n">total</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">dice_probs</span><span class="p">[</span><span class="n">total</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">36.0</span>
+
+<span class="c1"># Map From Dice Roll To Possible Tiles to Flip Down
+</span><span class="n">tile_lookup</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="n">tiles</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="bp">True</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+<span class="n">tile_values</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">elem</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">tile_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">total</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="n">tile_lookup</span><span class="p">[</span><span class="n">total</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">valid_move</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param move: list of int, tiles to attempt to flip down
+    :param tiles: list of int, tiles currently on the board
+    :return: Bool is the move valid for tiles on the board
+    </span><span class="sh">"""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">move</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">move</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">def</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param move: list of int, tiles to attempt to flip down
+    :param tiles: list of int, tiles currently on the board
+    :return: list of int, the new board
+    </span><span class="sh">"""</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">move</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">move</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">retval</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param tiles: list of int, tiles currently on the board
+    :return: int the score of the board
+    </span><span class="sh">"""</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="k">def</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    :param tiles: list of int, tiles currently on the board
+    :param roll: int, the roll for the player
+    :return: list of list of int, legal moves for this board state with this roll
+    </span><span class="sh">"""</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">tile_lookup</span><span class="p">[</span><span class="n">roll</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">valid_move</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">move</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retval</span>
+
+<span class="c1"># Store expected value in [(board_state, roll)] with roll==0 being the player not having rolled yet
+</span><span class="n">memoize</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">empty_board</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="n">memoize</span><span class="p">[(</span><span class="n">empty_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)</span> <span class="ow">in</span> <span class="n">memoize</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">roll</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">my_roll</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">dice_probs</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">my_roll</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span>
+        <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">total</span>
+        <span class="k">return</span> <span class="n">total</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+        <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">)</span>
+        <span class="n">roll_score</span> <span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+    <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">):</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">)</span>
+    <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">best_score</span>
+    <span class="k">return</span> <span class="n">best_score</span>
+<span class="n">full_board</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="nf">dfs</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now that we have a calculated optimal value function for the expected value of a game we can answer some of my 
+questions from above.
+With the exact value function we can loop over actions to find an optimal policy for expected value.</p>
+
+<h3 id="what-is-the-expected-value-for-the-game">What is the expected value for the game?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">dfs</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></div></div>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">11.</span>157508444202621
+</code></pre></div></div>
+
+<h3 id="what-is-the-best-opening-roll">What is the best opening roll?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="n">retval</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">memoize</span><span class="p">[(</span><span class="n">full_board</span><span class="p">,</span> <span class="n">i</span><span class="p">)]])</span>
+<span class="n">retval</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">retval</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">retval</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[9, 7.6236893875640135]
+[8, 9.24080617861096]
+[12, 9.936173208638165]
+[7, 10.825008858089767]
+[10, 11.139918487467915]
+[11, 11.194009457452708]
+[6, 11.726631321763904]
+[5, 12.514746172581951]
+[4, 13.706206147751468]
+[3, 14.31391370496678]
+[2, 15.838927661162352]
+</code></pre></div></div>
+
+<p>The best roll by far is a 9.  The worst roll is a 2.</p>
+
+<h3 id="is-it-ever-in-a-players-best-interest-to-not-close-the-largest-tile-they-can">Is it ever in a players’ best interest to <strong>not</strong> close the largest tile they can?</h3>
+
+<p>To answer this question we have to look over all 2**9 possible board states and evaluate if the Greedy move is 
+the same as the best move.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">to_bin</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    param l: list of int, the board state
+    return: int the binary representation of the board state
+    </span><span class="sh">"""</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="nf">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">exceptions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">board_state</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nf">sum</span><span class="p">(</span><span class="n">board_state</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">best_move</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+            <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">roll_score</span> <span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+                <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+        
+        <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">continue</span>
+        
+        <span class="n">biggest_move</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">roll</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">to_bin</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">biggest_move</span> <span class="o">!=</span> <span class="n">best_move</span><span class="p">:</span>
+            <span class="n">better_option</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">best_move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">greedy_option</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">biggest_move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">exceptions</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="nf">pretty_print_roll</span><span class="p">(</span><span class="n">board_state</span><span class="p">),</span> <span class="n">roll</span><span class="p">,</span> <span class="nf">pretty_print_roll</span><span class="p">(</span><span class="n">best_move</span><span class="p">),</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">better_option</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">greedy_option</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+
+            <span class="n">exceptions</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">exceptions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Number of exceptions: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">exceptions</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">exceptions</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">Board</span><span class="sh">"</span><span class="p">,</span> <span class="sh">'</span><span class="s">Roll</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Best Move</span><span class="sh">'</span><span class="p">,</span> <span class="sh">"</span><span class="s">Expected Value</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Greedy Value</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">df</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of exceptions: 210
+Board	Roll	Best Move	Expected Value	Greedy Value
+0	1,2,3,4,7,	12	2,3,7,	4.111111	4.214506
+1	1,2,3,4,5,6,	12	3,4,5,	4.524691	4.638117
+2	1,2,4,5,6,	12	2,4,6,	4.611111	4.763889
+3	1,3,4,5,6,	12	3,4,5,	5.000000	5.300926
+4	1,2,3,4,6,	11	2,3,6,	4.111111	4.214506
+</code></pre></div></div>
+
+<p>So out of the (10 Dice Rolls) * (512 Tile States) = 5120 game states it is advantageous to not play greedily in 210 
+circumstances.
+The largest difference in expected value though from these changes is 0.1 points.</p>
+
+<p>Let’s assume the players are playing without knowledge of each other’s scores and simply play to optimize expected 
+value or to play the greedy move, how big a difference does it make?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_move_best</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">):</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">best_move</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">possible_moves</span><span class="p">:</span>
+        <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+        <span class="n">roll_score</span> <span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+            <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+    <span class="k">return</span> <span class="n">best_move</span>
+
+<span class="k">def</span> <span class="nf">get_move_greedy</span><span class="p">(</span><span class="n">board_state</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">possible_moves</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">to_bin</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="sh">"</span><span class="s">best</span><span class="sh">"</span><span class="p">):</span>
+    <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+        
+        <span class="n">possible_moves</span> <span class="o">=</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">d1</span><span class="o">+</span><span class="n">d2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">possible_moves</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span><span class="o">==</span><span class="sh">'</span><span class="s">best</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="nf">get_move_best</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span><span class="o">==</span><span class="sh">'</span><span class="s">greedy</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="nf">get_move_greedy</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">)</span>
+        <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">my_tiles</span><span class="p">)</span>
+
+<span class="n">games_played_ev</span> <span class="o">=</span> <span class="p">[</span><span class="nf">simulate</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)]</span>
+<span class="n">games_played_greedy</span> <span class="o">=</span> <span class="p">[</span><span class="nf">simulate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="sh">'</span><span class="s">greedy</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<p>Overlaying the probability distributions leads to small differences, but they could simply be sampling errors.</p>
+
+<p><img src="/assets/2020_12_30/greedy_distribution.png" alt="Distributions" /></p>
+
+<p>Viewing their probability distribution functions and cumulative distribution functions has similar conclusions.</p>
+
+<p><img src="/assets/2020_12_30/greedy_pdf.png" alt="Distributions" /></p>
+
+<p>However a one sided KS test shows statistically significant differences in their distributions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scipy.stats</span> <span class="kn">import</span> <span class="n">kstest</span>
+<span class="nf">kstest</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">games_played_greedy</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="sh">'</span><span class="s">greater</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KstestResult(statistic=0.018660000000000065, pvalue=7.412305228600443e-16)
+</code></pre></div></div>
+
+<p>The longer you play though the more the small differences start to matter.
+We can say a day of playing this game is around 20 rounds.
+How much does this difference in policy effect the likelihood of winning any given day?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">num_wins</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">num_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">day_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1_000</span><span class="p">):</span>
+    <span class="n">ev_scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">greedy_scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_greedy</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">wins</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">ev_scores</span> <span class="o">&lt;</span> <span class="n">greedy_scores</span><span class="p">)</span>
+    <span class="n">losses</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">ev_scores</span> <span class="o">&gt;</span> <span class="n">greedy_scores</span><span class="p">)</span>
+    <span class="n">num_losses</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+    <span class="n">num_wins</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">wins</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">wins</span> <span class="o">&gt;</span> <span class="n">losses</span><span class="p">:</span>
+        <span class="n">day_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">win</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">losses</span> <span class="o">&gt;</span> <span class="n">wins</span><span class="p">:</span>
+        <span class="n">day_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">loss</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">losses</span> <span class="o">==</span> <span class="n">wins</span><span class="p">:</span>
+        <span class="n">day_results</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">tie</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">day_results</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">day_results</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="sh">'</span><span class="s">Expected Value Win Day</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">day_results</span><span class="o">==</span><span class="sh">'</span><span class="s">win</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])],</span>
+  <span class="p">[</span><span class="sh">'</span><span class="s">Greedy Win Day</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">day_results</span><span class="o">==</span><span class="sh">'</span><span class="s">loss</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])],</span>
+  <span class="p">[</span><span class="sh">'</span><span class="s">Tie</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">day_results</span><span class="o">==</span><span class="sh">'</span><span class="s">tie</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="p">]</span>
+<span class="n">plt_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Winning The Day With Different Strategies</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt_df</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Result</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Count</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">sns</span><span class="p">.</span><span class="nf">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">plt_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="sh">'</span><span class="s">Result</span><span class="sh">'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">Count</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Result</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Expected Value Win Day</td>
+      <td>493</td>
+    </tr>
+    <tr>
+      <td>Greedy Win Day</td>
+      <td>407</td>
+    </tr>
+    <tr>
+      <td>Tie</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/2020_12_30/ev_day_wins.png" alt="EV Day Wins" /></p>
+
+<p>This difference in strategy means winning ~9% more days than just playing greedily. 
+Not so small a difference after all!</p>
+
+<h3 id="what-is-the-value-of-going-second-in-a-two-player-game">What is the value of going second in a two player game?</h3>
+
+<p>This is slightly a harder question to answer.
+In order to do this we have to make a couple of assumptions.</p>
+
+<ul>
+  <li>The first player to roll plays optimally for expected value number of points.
+    <ul>
+      <li>I believe this is <strong>not</strong> the optimal strategy to <strong>win</strong> in a two player game</li>
+      <li>A simple thought experiment for a 100 person game shows that it probably is not the best strategy, one should be 
+more risky in an attempt to get a good score.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>We can represent this difference in policy by calculating the difference in win, loss and tie rate between an 
+expected value player playing against themselves, vs playing an optimized player 2 player knowing what score they 
+have to beat.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">P2Policy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span> <span class="o">=</span> <span class="n">to_beat</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">losses</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">ties</span> <span class="o">=</span> <span class="bp">None</span>
+        
+    <span class="k">def</span> <span class="nf">create_policy</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">full_board</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">):</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">roll</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">my_roll</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">dice_probs</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">my_roll</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span>
+            <span class="n">memoize</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">total</span>
+            <span class="k">return</span> <span class="n">total</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+            <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">tiles</span><span class="p">)</span>
+            <span class="n">roll_score</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">to_beat</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+        <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">score_tiles</span><span class="p">(</span><span class="n">tiles</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">to_beat</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memoize_win_prob</span><span class="p">[(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">roll</span><span class="p">)]</span> <span class="o">=</span> <span class="n">best_score</span>
+        <span class="k">return</span> <span class="n">best_score</span>
+
+    <span class="k">def</span> <span class="nf">get_stats</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">wins</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">losses</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">ties</span> <span class="o">/</span> <span class="mi">10_000</span>
+        <span class="n">wins</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">ties</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">simulate</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">:</span>
+                <span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">:</span>
+                <span class="n">losses</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">:</span>
+                <span class="n">ties</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wins</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">losses</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">ties</span> <span class="o">=</span> <span class="n">wins</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">ties</span>
+        <span class="k">return</span> <span class="n">wins</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">losses</span> <span class="o">/</span> <span class="mi">10_000</span><span class="p">,</span> <span class="n">ties</span> <span class="o">/</span> <span class="mi">10_000</span>
+    
+    <span class="k">def</span> <span class="nf">get_move_best</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">board_state</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">):</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">best_move</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">possible_moves</span><span class="p">:</span>
+            <span class="n">new_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">board_state</span><span class="p">)</span>
+            <span class="n">roll_score</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_dfs_win_prob</span><span class="p">(</span><span class="n">new_tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">to_beat</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">roll_score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">roll_score</span>
+                <span class="n">best_move</span> <span class="o">=</span> <span class="n">move</span>
+        <span class="k">return</span> <span class="n">best_move</span>
+
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+
+            <span class="n">possible_moves</span> <span class="o">=</span> <span class="nf">get_valid_moves</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">d1</span><span class="o">+</span><span class="n">d2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">possible_moves</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nf">score_tiles</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">)</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_move_best</span><span class="p">(</span><span class="n">my_tiles</span><span class="p">,</span> <span class="n">possible_moves</span><span class="p">)</span>
+            <span class="n">my_tiles</span> <span class="o">=</span> <span class="nf">flip_tiles</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">my_tiles</span><span class="p">)</span>
+
+
+<span class="c1"># Calculate the PDF of expected value scores
+</span><span class="n">expected_value_score_pdf</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">my_games</span> <span class="o">=</span> <span class="nf">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">games_played_ev</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">i</span><span class="p">])</span>
+  <span class="n">expected_value_score_pdf</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">my_games</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">))</span>
+
+<span class="c1"># Caculate the win, loss, draw rate of P2
+</span><span class="n">total_win</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">,</span> <span class="n">total_tie</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">policies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Calculating Policy for </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+  <span class="n">policy</span> <span class="o">=</span> <span class="nc">P2Policy</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+  <span class="n">policies</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+
+  <span class="n">w</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">policy</span><span class="p">.</span><span class="nf">get_stats</span><span class="p">()</span>
+  <span class="n">prob_of_case</span> <span class="o">=</span> <span class="n">expected_value_score_pdf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">total_win</span> <span class="o">+=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">prob_of_case</span>
+  <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">l</span> <span class="o">*</span> <span class="n">prob_of_case</span>
+  <span class="n">total_tie</span> <span class="o">+=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">prob_of_case</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">total_win</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">,</span> <span class="n">total_tie</span><span class="p">)</span>
+
+<span class="c1"># Calculate Self Interactions
+</span><span class="n">size</span><span class="o">=</span><span class="mi">1_000_000</span>
+<span class="n">g1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="n">games_played_ev</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">self_wins</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">g1</span> <span class="o">&gt;</span> <span class="n">g2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">self_loss</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">g1</span> <span class="o">&lt;</span> <span class="n">g2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">self_tie</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">g1</span> <span class="o">==</span> <span class="n">g2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">self_wins</span> <span class="o">/</span> <span class="n">size</span><span class="p">,</span> <span class="n">self_loss</span> <span class="o">/</span> <span class="n">size</span><span class="p">,</span> <span class="n">self_tie</span> <span class="o">/</span> <span class="n">size</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mf">0.477316</span><span class="p">,</span> <span class="mf">0.477553</span><span class="p">,</span> <span class="mf">0.045129</span>
+<span class="mf">0.479137</span><span class="p">,</span> <span class="mf">0.479201</span><span class="p">,</span> <span class="mf">0.041662</span>
+</code></pre></div></div>
+
+<p>These values are within sampling error. The value of going second is either zero or small enough to be not 
+accurately sampled using the methods above.  This is a surprising result! An explanation for this is there is no 
+such thing as a “risky” move, that is a move with higher variance or better extreme value but with worse expected 
+value. We could further compare the actual policies generated instead of the end game results sampled.  We could 
+also explicitly calculate the tie, win and loss percentages for a given p2 strategy instead of sampling it. However, 
+to remove all the sampling error we would have to explicitly calculate the optimal expected strategy points 
+probability distribution function also.</p>
+
+<p>This was an interesting game to study, simple enough to calculate explicit solutions and perfectly solve, yet 
+intricate enough to have some novel strategy. It would be fun to hook up <a href="https://arxiv.org/pdf/2007.13544.
+pdf">ReBel</a> to play around with the codebase.  I’m not sure if the method can work with stocastic environments though.  If 
+you want to look through the full jupyter notebook analysis it is on my <a href="https://github.
+com/lilleswing/riddler/blob/master/shut_the_box/shut_the_box.ipynb">github</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Karl Leswing</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Karl Leswing
+            
+            </li>
+            
+            <li><a href="mailto:lilleswing@gmail.com">lilleswing@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/lilleswing"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">lilleswing</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/karl_leswing"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">karl_leswing</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+            <img src=https://imgs.xkcd.com/comics/here_to_help.png title="&quot;We TOLD you it was hard.&quot; &quot;Yeah, but now that I&#39;VE tried, we KNOW it&#39;s hard.&quot;" alt="Here to Help" srcset="//imgs.xkcd.com/comics/here_to_help_2x.png 2x"/>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

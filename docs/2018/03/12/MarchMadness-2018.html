@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>March Madness With Dense Neural Networks | Karl Leswing</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="March Madness With Dense Neural Networks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I wanted to see how long it would take to repro what I did in 2013 with DeepChem. Turns out when you do something for a job you get much better at it." />
+<meta property="og:description" content="I wanted to see how long it would take to repro what I did in 2013 with DeepChem. Turns out when you do something for a job you get much better at it." />
+<link rel="canonical" href="http://karlleswing.com/2018/03/12/MarchMadness-2018.html" />
+<meta property="og:url" content="http://karlleswing.com/2018/03/12/MarchMadness-2018.html" />
+<meta property="og:site_name" content="Karl Leswing" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="March Madness With Dense Neural Networks" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2018-03-12T00:00:00+00:00","datePublished":"2018-03-12T00:00:00+00:00","description":"I wanted to see how long it would take to repro what I did in 2013 with DeepChem. Turns out when you do something for a job you get much better at it.","headline":"March Madness With Dense Neural Networks","mainEntityOfPage":{"@type":"WebPage","@id":"http://karlleswing.com/2018/03/12/MarchMadness-2018.html"},"url":"http://karlleswing.com/2018/03/12/MarchMadness-2018.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://karlleswing.com/feed.xml" title="Karl Leswing" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Karl Leswing</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/posts/">Posts</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<article class="post">
+
+  <!--<header class="post-header">
+    <h1 class="post-title">March Madness With Dense Neural Networks</h1>
+  </header>-->
+
+  <div class="post-content">
+    <p>I wanted to see how long it would take to repro what I did in 2013 with DeepChem.
+Turns out when you do something for a job you get much better at it.
+<img src="/assets/mm-2018/final_selection_with_games_to_watch.png" alt="bracket" /></p>
+
+<p>Games highlighted in green were predicted to be within 2 points.</p>
+
+<h2 id="about-the-model">About the Model</h2>
+<p>The model uses a dense neural network with the following
+feature values from kenpom.
+All analysis was done using <a href="https://deepchem.io">DeepChem</a>.
+You can get into my head and walk through what I did <a href="https://github.com/lilleswing/March-Madness/blob/master/2018/dev_notebook.ipynb">here</a>.</p>
+
+<p>The final Network had a structure of</p>
+
+<p><strong>76 features per game -&gt; 64 relu (0.35 dropout)-&gt; 32 relu (0.35 dropout)-&gt; 1 linear</strong></p>
+
+<p>These are the features used</p>
+<ul>
+  <li>RankAdjOE</li>
+  <li>RankAdjDE</li>
+  <li>RankAdjTempo</li>
+  <li>RankAPL_Off</li>
+  <li>RankAPL_Def</li>
+  <li>RankeFG_Pct</li>
+  <li>RankDeFG_Pct</li>
+  <li>RankTO_Pct</li>
+  <li>RankDTO_Pct</li>
+  <li>RankOR_Pct</li>
+  <li>RankDOR_Pct</li>
+  <li>RankFT_Rate</li>
+  <li>RankDFT_Rate</li>
+  <li>RankDFT_Rate</li>
+  <li>RankFG3Pct</li>
+  <li>RankFG3Pct&amp;od=d</li>
+  <li>RankFG2Pct</li>
+  <li>RankFG2Pct&amp;od=d</li>
+  <li>RankFTPct</li>
+  <li>RankFTPct&amp;od=d</li>
+  <li>RankBlockPct</li>
+  <li>RankBlockPct&amp;od=d</li>
+  <li>RankStlRate</li>
+  <li>RankStlRate&amp;od=d</li>
+  <li>RankF3GRate</li>
+  <li>RankF3GRate&amp;od=d</li>
+  <li>RankARate</li>
+  <li>RankARate&amp;od=d</li>
+  <li>RankOff_3</li>
+  <li>RankDef_3</li>
+  <li>RankOff_2</li>
+  <li>RankDef_2</li>
+  <li>RankOff_1</li>
+  <li>RankDef_1</li>
+  <li>RankSOSO</li>
+  <li>RankSOSD</li>
+  <li>ExpRank</li>
+  <li>SizeRank</li>
+</ul>
+
+<p>To play a “game” we append the two teams feature vectors and the network
+learns the final score with positive values if the first team won.
+We “play” the game in both orientations and average the results.</p>
+
+<h2 id="model-performance">Model Performance</h2>
+<p>We classify based on the sign of the result <strong>74%</strong> of games correctly given a
+random holdout.</p>
+
+<p>For core prediction we get a pearson r^2 of 0.5 from a random split holdout set,
+bootstrapped and averaged over 5 trials.  You can see the misclassifications
+highlighted in red.</p>
+
+<p><img src="/assets/mm-2018/scores_scatter.png" alt="scatter" /></p>
+
+<p>We see very good enrichment and trend, but the vertical gap is still large.</p>
+
+<h2 id="feature-importance">Feature Importance</h2>
+<p>After throwing the model through <a href="https://homes.cs.washington.edu/~marcotcr/blog/lime/">LIME</a>
+for model interpretability the most important features were Adjusted Offensive Efficiency,
+Strength of Schedule Offense, and Strength of Schedule Defense.
+<img src="/assets/mm-2018/feature_importance.png" alt="feature importance" /></p>
+
+<h2 id="viewing-as-win-probabilities">Viewing as Win Probabilities</h2>
+<p>We can view the point spreads as win probabilities.
+We can round predictions to half points and then use the probability of winning as the probability that we predicted correctly over our holdout cross validation sets.</p>
+
+<p><img src="/assets/mm-2018/half-point-slice.png" alt="Half Point Slice" /></p>
+
+<p>You can see how we get fewer and fewer games the more of a blowout the game is.</p>
+
+<p><img src="/assets/mm-2018/num_games_per_diff.png" alt="num_games_per_diff" /></p>
+
+<p>Plotting win percentage vs game diff gives the approximate shape we would expect.
+However it is a bit more bumpy than I would like.</p>
+
+<p><img src="/assets/mm-2018/prob_winning.png" alt="prob_winning" /></p>
+
+<p>To fix this I convolved over a length 3 uniform distribution filter.</p>
+
+<p><img src="/assets/mm-2018/smooth_prob_winning.png" alt="smooth_prob_winning" /></p>
+
+<p>Now that we can convert point spreads to probabilities we can do all the fun
+tables that <a href="https://kenpom.com/blog/">kenpom</a> and <a href="https://projects.fivethirtyeight.com/2018-march-madness-predictions/">538</a> do for bracket predictions using monte-carlo simulation.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th style="text-align: center">R  32</th>
+      <th style="text-align: center">Sweet 16</th>
+      <th style="text-align: right">Elite 8</th>
+      <th style="text-align: right">Final 4</th>
+      <th style="text-align: right">Championship</th>
+      <th style="text-align: right">Champion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Virginia</td>
+      <td style="text-align: center">1.00</td>
+      <td style="text-align: center">0.80</td>
+      <td style="text-align: right">0.65</td>
+      <td style="text-align: right">0.43</td>
+      <td style="text-align: right">0.30</td>
+      <td style="text-align: right">0.17</td>
+    </tr>
+    <tr>
+      <td>Duke</td>
+      <td style="text-align: center">1.00</td>
+      <td style="text-align: center">0.84</td>
+      <td style="text-align: right">0.57</td>
+      <td style="text-align: right">0.43</td>
+      <td style="text-align: right">0.24</td>
+      <td style="text-align: right">0.15</td>
+    </tr>
+    <tr>
+      <td>Villanova</td>
+      <td style="text-align: center">1.00</td>
+      <td style="text-align: center">0.82</td>
+      <td style="text-align: right">0.60</td>
+      <td style="text-align: right">0.37</td>
+      <td style="text-align: right">0.23</td>
+      <td style="text-align: right">0.14</td>
+    </tr>
+    <tr>
+      <td>Purdue</td>
+      <td style="text-align: center">1.00</td>
+      <td style="text-align: center">0.80</td>
+      <td style="text-align: right">0.53</td>
+      <td style="text-align: right">0.31</td>
+      <td style="text-align: right">0.18</td>
+      <td style="text-align: right">0.10</td>
+    </tr>
+    <tr>
+      <td>Cincinnati</td>
+      <td style="text-align: center">0.96</td>
+      <td style="text-align: center">0.74</td>
+      <td style="text-align: right">0.49</td>
+      <td style="text-align: right">0.27</td>
+      <td style="text-align: right">0.15</td>
+      <td style="text-align: right">0.07</td>
+    </tr>
+    <tr>
+      <td>North+Carolina</td>
+      <td style="text-align: center">1.00</td>
+      <td style="text-align: center">0.76</td>
+      <td style="text-align: right">0.46</td>
+      <td style="text-align: right">0.29</td>
+      <td style="text-align: right">0.15</td>
+      <td style="text-align: right">0.07</td>
+    </tr>
+    <tr>
+      <td>Michigan+St.</td>
+      <td style="text-align: center">0.94</td>
+      <td style="text-align: center">0.67</td>
+      <td style="text-align: right">0.31</td>
+      <td style="text-align: right">0.20</td>
+      <td style="text-align: right">0.09</td>
+      <td style="text-align: right">0.05</td>
+    </tr>
+    <tr>
+      <td>Michigan</td>
+      <td style="text-align: center">0.85</td>
+      <td style="text-align: center">0.62</td>
+      <td style="text-align: right">0.33</td>
+      <td style="text-align: right">0.18</td>
+      <td style="text-align: right">0.08</td>
+      <td style="text-align: right">0.03</td>
+    </tr>
+    <tr>
+      <td>Kansas</td>
+      <td style="text-align: center">0.94</td>
+      <td style="text-align: center">0.66</td>
+      <td style="text-align: right">0.39</td>
+      <td style="text-align: right">0.16</td>
+      <td style="text-align: right">0.07</td>
+      <td style="text-align: right">0.03</td>
+    </tr>
+    <tr>
+      <td>Xavier</td>
+      <td style="text-align: center">1.00</td>
+      <td style="text-align: center">0.66</td>
+      <td style="text-align: right">0.35</td>
+      <td style="text-align: right">0.17</td>
+      <td style="text-align: right">0.07</td>
+      <td style="text-align: right">0.03</td>
+    </tr>
+    <tr>
+      <td>Texas+Tech</td>
+      <td style="text-align: center">0.94</td>
+      <td style="text-align: center">0.62</td>
+      <td style="text-align: right">0.28</td>
+      <td style="text-align: right">0.12</td>
+      <td style="text-align: right">0.06</td>
+      <td style="text-align: right">0.03</td>
+    </tr>
+    <tr>
+      <td>Tennessee</td>
+      <td style="text-align: center">0.98</td>
+      <td style="text-align: center">0.69</td>
+      <td style="text-align: right">0.32</td>
+      <td style="text-align: right">0.12</td>
+      <td style="text-align: right">0.06</td>
+      <td style="text-align: right">0.02</td>
+    </tr>
+    <tr>
+      <td>Gonzaga</td>
+      <td style="text-align: center">0.91</td>
+      <td style="text-align: center">0.50</td>
+      <td style="text-align: right">0.28</td>
+      <td style="text-align: right">0.14</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.02</td>
+    </tr>
+    <tr>
+      <td>West+Virginia</td>
+      <td style="text-align: center">0.81</td>
+      <td style="text-align: center">0.46</td>
+      <td style="text-align: right">0.19</td>
+      <td style="text-align: right">0.08</td>
+      <td style="text-align: right">0.04</td>
+      <td style="text-align: right">0.02</td>
+    </tr>
+    <tr>
+      <td>Auburn</td>
+      <td style="text-align: center">0.96</td>
+      <td style="text-align: center">0.54</td>
+      <td style="text-align: right">0.28</td>
+      <td style="text-align: right">0.08</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+    </tr>
+    <tr>
+      <td>Ohio+St.</td>
+      <td style="text-align: center">0.81</td>
+      <td style="text-align: center">0.43</td>
+      <td style="text-align: right">0.23</td>
+      <td style="text-align: right">0.10</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+    </tr>
+    <tr>
+      <td>Wichita+St.</td>
+      <td style="text-align: center">0.94</td>
+      <td style="text-align: center">0.49</td>
+      <td style="text-align: right">0.14</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+    </tr>
+    <tr>
+      <td>Kentucky</td>
+      <td style="text-align: center">0.75</td>
+      <td style="text-align: center">0.42</td>
+      <td style="text-align: right">0.11</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+    </tr>
+    <tr>
+      <td>Clemson</td>
+      <td style="text-align: center">0.75</td>
+      <td style="text-align: center">0.39</td>
+      <td style="text-align: right">0.18</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Arizona</td>
+      <td style="text-align: center">0.81</td>
+      <td style="text-align: center">0.46</td>
+      <td style="text-align: right">0.12</td>
+      <td style="text-align: right">0.04</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Florida</td>
+      <td style="text-align: center">0.67</td>
+      <td style="text-align: center">0.29</td>
+      <td style="text-align: right">0.09</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>TCU</td>
+      <td style="text-align: center">0.66</td>
+      <td style="text-align: center">0.24</td>
+      <td style="text-align: right">0.06</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Texas+A%26M</td>
+      <td style="text-align: center">0.67</td>
+      <td style="text-align: center">0.18</td>
+      <td style="text-align: right">0.08</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Houston</td>
+      <td style="text-align: center">0.65</td>
+      <td style="text-align: center">0.26</td>
+      <td style="text-align: right">0.08</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Creighton</td>
+      <td style="text-align: center">0.55</td>
+      <td style="text-align: center">0.11</td>
+      <td style="text-align: right">0.06</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Nevada</td>
+      <td style="text-align: center">0.49</td>
+      <td style="text-align: center">0.14</td>
+      <td style="text-align: right">0.06</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Missouri</td>
+      <td style="text-align: center">0.51</td>
+      <td style="text-align: center">0.17</td>
+      <td style="text-align: right">0.07</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Seton+Hall</td>
+      <td style="text-align: center">0.51</td>
+      <td style="text-align: center">0.19</td>
+      <td style="text-align: right">0.09</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Florida+St.</td>
+      <td style="text-align: center">0.49</td>
+      <td style="text-align: center">0.17</td>
+      <td style="text-align: right">0.07</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Texas</td>
+      <td style="text-align: center">0.51</td>
+      <td style="text-align: center">0.11</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Butler</td>
+      <td style="text-align: center">0.49</td>
+      <td style="text-align: center">0.10</td>
+      <td style="text-align: right">0.04</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Miami+FL</td>
+      <td style="text-align: center">0.55</td>
+      <td style="text-align: center">0.19</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Virginia+Tech</td>
+      <td style="text-align: center">0.51</td>
+      <td style="text-align: center">0.08</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Kansas+St.</td>
+      <td style="text-align: center">0.45</td>
+      <td style="text-align: center">0.09</td>
+      <td style="text-align: right">0.04</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Oklahoma</td>
+      <td style="text-align: center">0.60</td>
+      <td style="text-align: center">0.11</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Arkansas</td>
+      <td style="text-align: center">0.51</td>
+      <td style="text-align: center">0.10</td>
+      <td style="text-align: right">0.04</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>North+Carolina+St.</td>
+      <td style="text-align: center">0.49</td>
+      <td style="text-align: center">0.14</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Alabama</td>
+      <td style="text-align: center">0.49</td>
+      <td style="text-align: center">0.10</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Arizona+St.</td>
+      <td style="text-align: center">0.34</td>
+      <td style="text-align: center">0.08</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Loyola+Chicago</td>
+      <td style="text-align: center">0.45</td>
+      <td style="text-align: center">0.12</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>UCLA</td>
+      <td style="text-align: center">0.33</td>
+      <td style="text-align: center">0.08</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>San+Diego+St.</td>
+      <td style="text-align: center">0.35</td>
+      <td style="text-align: center">0.09</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Rhode+Island</td>
+      <td style="text-align: center">0.40</td>
+      <td style="text-align: center">0.04</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Davidson</td>
+      <td style="text-align: center">0.25</td>
+      <td style="text-align: center">0.08</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Providence</td>
+      <td style="text-align: center">0.33</td>
+      <td style="text-align: center">0.07</td>
+      <td style="text-align: right">0.02</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>New+Mexico+St.</td>
+      <td style="text-align: center">0.25</td>
+      <td style="text-align: center">0.06</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>South+Dakota+St.</td>
+      <td style="text-align: center">0.19</td>
+      <td style="text-align: center">0.04</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Montana</td>
+      <td style="text-align: center">0.15</td>
+      <td style="text-align: center">0.04</td>
+      <td style="text-align: right">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Buffalo</td>
+      <td style="text-align: center">0.19</td>
+      <td style="text-align: center">0.05</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Murray+St.</td>
+      <td style="text-align: center">0.19</td>
+      <td style="text-align: center">0.04</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>UNC+Greensboro</td>
+      <td style="text-align: center">0.09</td>
+      <td style="text-align: center">0.02</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Georgia+St.</td>
+      <td style="text-align: center">0.04</td>
+      <td style="text-align: center">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Penn</td>
+      <td style="text-align: center">0.06</td>
+      <td style="text-align: center">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Bucknell</td>
+      <td style="text-align: center">0.06</td>
+      <td style="text-align: center">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Stephen+F.+Austin</td>
+      <td style="text-align: center">0.06</td>
+      <td style="text-align: center">0.01</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Marshall</td>
+      <td style="text-align: center">0.06</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>College+of+Charleston</td>
+      <td style="text-align: center">0.04</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Wright+St.</td>
+      <td style="text-align: center">0.02</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>UMBC</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Lipscomb</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Texas+Southern</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Iona</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Cal+St.+Fullerton</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+    <tr>
+      <td>Radford</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: center">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+      <td style="text-align: right">0.00</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="power-rankings-or-matchups">Power Rankings or Matchups</h2>
+<p>Is the model learning power rankings or is it learning matchups?</p>
+
+<p><img src="/assets/mm-2018/power_heatmap.png" alt="power_rankings" /></p>
+
+<p>This is the probability that any team beats any other team in the bracket.
+It is ordered by my models own internal power ranking.
+You can see that it generally follows power its own internal power ranking
+but with slight variation.</p>
+
+<p>The one outlier is my model somehow thinking that North Carolina Central
+will stomp on Villanova. It could be due to a bug or just that the game
+is so far out of the realm of games that have ever happened that my model
+has no basis.</p>
+
+<h2 id="play-ins">Play Ins</h2>
+<p><strong>Radford</strong>,LIU+Brooklyn,10.799</p>
+
+<p><strong>Arizona+St.</strong>,Syracues,1.744</p>
+
+<p><strong>UCLA</strong>,St.+Bonaventure,4.364</p>
+
+<p><strong>Texas+Southern</strong>,North+Carolina+Central,11.077</p>
+
+<h2 id="round-of-64">Round of 64</h2>
+<p><strong>Virginia</strong>,UMBC,+47.410909143249825</p>
+
+<p><strong>Creighton</strong>,Kansas+St.,+3.7489317412863414</p>
+
+<p><strong>Kentucky</strong>,Davidson,+11.535352463049916</p>
+
+<p><strong>Arizona</strong>,Buffalo,+17.220292130042335</p>
+
+<p><strong>Miami+FL</strong>,Loyola+Chicago,+3.612004385758346</p>
+
+<p><strong>Tennessee</strong>,Wright+St.,+36.12079217409836</p>
+
+<p><strong>Nevada</strong>,Texas,+1.951813175863908</p>
+
+<p><strong>Cincinnati</strong>,Georgia+St.,+30.113146119838323</p>
+
+<p><strong>Xavier</strong>,Texas+Southern,+50.37626510178494</p>
+
+<p>Missouri,<strong>Florida+St.</strong>,+1.1025389096046099</p>
+
+<p><strong>Ohio+St.</strong>,South+Dakota+St.,+18.6005472988174</p>
+
+<p><strong>Gonzaga</strong>,UNC+Greensboro,+22.951239992514456</p>
+
+<p><strong>Houston</strong>,San+Diego+St.,+7.958873435265513</p>
+
+<p><strong>Michigan</strong>,Montana,+21.881586360085134</p>
+
+<p><strong>Texas+A%26M</strong>,Providence,+9.10223822731434</p>
+
+<p><strong>North+Carolina</strong>,Lipscomb,+41.603373846286296</p>
+
+<p><strong>Villanova</strong>,Radford,+49.80577092134371</p>
+
+<p><strong>Virginia+Tech</strong>,Alabama,+2.6066752386376972</p>
+
+<p><strong>West+Virginia</strong>,Murray+St.,+18.60793528469507</p>
+
+<p><strong>Wichita+St.</strong>,Marshall,+28.524018057158784</p>
+
+<p><strong>Florida</strong>,UCLA,+8.78494577122894</p>
+
+<p><strong>Texas+Tech</strong>,Stephen+F.+Austin,+33.78383539028084</p>
+
+<p>Arkansas,<strong>Butler</strong>,+1.7827628925168209</p>
+
+<p><strong>Purdue</strong>,Cal+St.+Fullerton,+46.85774918254356</p>
+
+<p><strong>Kansas</strong>,Penn,+35.25468398940229</p>
+
+<p><strong>Seton+Hall</strong>,North+Carolina+St.,+2.7196226800980585</p>
+
+<p><strong>Clemson</strong>,New+Mexico+St.,+11.673416554987885</p>
+
+<p><strong>Auburn</strong>,College+of+Charleston,+29.591478905605584</p>
+
+<p><strong>TCU</strong>,Arizona+St.,+7.444786319558336</p>
+
+<p><strong>Michigan+St.</strong>,Bucknell,+34.666868401820324</p>
+
+<p>Rhode+Island,<strong>Oklahoma</strong>,+5.085826803251746</p>
+
+<p><strong>Duke</strong>,Iona,+47.03391869235143</p>
+
+<h2 id="round-of-32">Round of 32</h2>
+<p><strong>Virginia</strong>,Creighton,+16.113167913280616</p>
+
+<p><strong>Kentucky</strong>,Arizona,+0.6839617522146398</p>
+
+<p>Miami+FL,<strong>Tennessee</strong>,+8.678405542064755</p>
+
+<p>Nevada,<strong>Cincinnati</strong>,+11.316839007178874</p>
+
+<p><strong>Xavier</strong>,Florida+St.,+8.208375980632464</p>
+
+<p>Ohio+St.,<strong>Gonzaga</strong>,+1.85090095497707</p>
+
+<p>Houston,<strong>Michigan</strong>,+8.72343837880933</p>
+
+<p>Texas+A%26M,<strong>North+Carolina</strong>,+11.430504564039188</p>
+
+<p><strong>Villanova</strong>,Virginia+Tech,+18.344749956415477</p>
+
+<p><strong>West+Virginia</strong>,Wichita+St.,+4.362393108981096</p>
+
+<p>Florida,<strong>Texas+Tech</strong>,+5.24062414324332</p>
+
+<p>Butler,<strong>Purdue</strong>,+14.925006326029575</p>
+
+<p><strong>Kansas</strong>,Seton+Hall,+9.882623292777138</p>
+
+<p>Clemson,<strong>Auburn</strong>,+1.4857501037939909</p>
+
+<p>TCU,<strong>Michigan+St.</strong>,+8.925556213737597</p>
+
+<p>Oklahoma,<strong>Duke</strong>,+19.266296711000233</p>
+
+<h2 id="round-of-16">Round of 16</h2>
+<p><strong>Virginia</strong>,Kentucky,+15.228821000709875</p>
+
+<p>Tennessee,<strong>Cincinnati</strong>,+6.174240971708502</p>
+
+<p><strong>Xavier</strong>,Gonzaga,+1.2333574795101763</p>
+
+<p>Michigan,<strong>North+Carolina</strong>,+3.266797786524817</p>
+
+<p><strong>Villanova</strong>,West+Virginia,+9.769149390972059</p>
+
+<p>Texas+Tech,<strong>Purdue</strong>,+5.224879981704366</p>
+
+<p><strong>Kansas</strong>,Auburn,+4.3595497807800525</p>
+
+<p>Michigan+St.,<strong>Duke</strong>,+5.902065701946304</p>
+
+<h2 id="round-of-8">Round of 8</h2>
+<p><strong>Virginia</strong>,Cincinnati,+4.103992750785233</p>
+
+<p>Xavier,<strong>North+Carolina</strong>,+4.835349585538642</p>
+
+<p><strong>Villanova</strong>,Purdue,+3.064758428736159</p>
+
+<p>Kansas,<strong>Duke</strong>,+9.975918350133703</p>
+
+<h2 id="round-of-2">Round of 2</h2>
+<p><strong>Virginia</strong>,North+Carolina,+5.808692091184689</p>
+
+<p>Villanova,<strong>Duke</strong>,+0.13683682844858347</p>
+
+<h2 id="round-of-1">Round of 1</h2>
+<p><strong>Virginia</strong>,Duke,+0.44594562130204835</p>
+
+<h2 id="misc-notes">Misc Notes</h2>
+<p>Despite being based on Kenpom data my network is not nearly as high
+on Gonzaga as Kenpom.</p>
+
+<p>The feature vector we have is lacking in a number of ways.</p>
+
+<p>Now that it is done I wish I modelled as a classification task.
+Doing this would allow me to use game win weighting as a hyper-parameter.
+From the results of that I could infer whether 1 point wins were actually
+valuable and repeatable or luck.  Also I could do all the cool bayes stuff
+that 538 does for it’s infographic.</p>
+
+<h3 id="missing-features">Missing Features</h3>
+<p>We can add home field advantage in this scheme fairly easily.  I also didn’t
+encode defensive fingerprint data from kenpom as a one-hot encoded value.</p>
+
+<h3 id="player-values">Player Values</h3>
+<p>These team fingerprints are also a snapshot in time, they don’t cover things
+like players going on and coming back from injury.</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Karl Leswing</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Karl Leswing
+            
+            </li>
+            
+            <li><a href="mailto:lilleswing@gmail.com">lilleswing@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/lilleswing"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">lilleswing</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/karl_leswing"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">karl_leswing</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+            <img src=https://imgs.xkcd.com/comics/here_to_help.png title="&quot;We TOLD you it was hard.&quot; &quot;Yeah, but now that I&#39;VE tried, we KNOW it&#39;s hard.&quot;" alt="Here to Help" srcset="//imgs.xkcd.com/comics/here_to_help_2x.png 2x"/>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
