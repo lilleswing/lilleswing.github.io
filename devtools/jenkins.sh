@@ -1,7 +1,8 @@
 #!/bin/bash
 set -xe
+rm -rf docs
 bash devtools/set_docker_user.sh
 docker compose build
 docker compose run jekyll
-cd _site
-# Site is in _site
+mv _site docs
+cp -r misc docs
