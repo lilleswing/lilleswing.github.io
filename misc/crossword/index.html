@@ -2,12 +2,13 @@
 <html>
 <head>
     <title>Crossword Helper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Crossword Helper</h1>
-    <input type="text" id="query" placeholder="Enter query (e.g., a*p*e)">
-    <button onclick="findMatches()">Find Matches</button>
-    <div id="matches"></div>
+<body class="container">
+    <h1 class="mt-5">Crossword Helper</h1>
+    <input type="text" id="query" class="form-control" placeholder="Enter query (e.g., a*p*e)">
+    <button onclick="findMatches()" class="btn btn-primary mt-3">Find Matches</button>
+    <div id="matches" class="mt-3"></div>
     <script src="script.js"></script>
 </body>
 </html>
