@@ -1,4 +1,4 @@
-FROM ruby:3.4.4
+FROM ruby:3.4.5
 
 RUN apt-get update -yq \
     && apt-get install -yq --no-install-recommends \

@@ -1,5 +1,6 @@
 async function findMatches() {
-  const query = document.getElementById("query").value;
+  const query = document.getElementById("query").value.toLowerCase();
+  console.log(query);
   const response = await fetch("words.txt");
   const text = await response.text();
   const words = text.split("\n");
