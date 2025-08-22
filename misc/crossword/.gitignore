@@ -1,0 +1,3 @@
+*.ipynb
+unigram_freq.csv
+.ipynb_checkpoints
