@@ -7,3 +7,4 @@ docker compose run jekyll
 mv _site docs
 cp -r misc docs
 docker compose run jekyll ruby devtools/create_index_files.rb -d docs/misc
+docker compose down --remove-orphans
